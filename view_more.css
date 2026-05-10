@@ -1,0 +1,62 @@
+  :root {
+            --navy: #003366;
+            --sky: #e3f2fd;
+            --white: #ffffff;
+            --gray: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--sky);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* The Main Container */
+        .order-card {
+            background-color: var(--white);
+            width: 350px;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid var(--navy);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--navy);
+            cursor: pointer;
+            transition: color 0.2s ease;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: #ff4d4d;
+        }
+
+        h3 {
+            color: var(--navy);
+            margin-top: 0;
+            border-bottom: 2px solid var(--sky);
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p {
+            background-color: var(--gray);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 8px 0;
+            color: #333;
+            font-weight: 500;
+            border-left: 4px solid var(--navy);
+        }
