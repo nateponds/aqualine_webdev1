@@ -1,14 +1,14 @@
-const DELIVERY_FEE = 50;
+
 
 function openAndRenderCart() {
     const panel = document.querySelector('.cart-panel');
     
-    // if (panel.classList.contains('active')) {
-    //     closeCart();
-    // } else {
+    if (panel.classList.contains('active')) {
+        closeCart();
+    } else {
         panel.classList.add('active');
         renderCart();
-    // }
+    }
 }
 
 function closeCart() {
@@ -26,7 +26,6 @@ function renderCart() {
     const listContainer = document.querySelector('.cart-panel');
     const cartIds = Object.keys(window.cart);
 
-    // 1. Handle Empty State using your .empty-msg class
     if (cartIds.length === 0) {
         listContainer.innerHTML = `
             <div class="cart-container" style="grid-template-columns: 1fr;">
@@ -47,7 +46,6 @@ function renderCart() {
 
     let subtotal = 0;
     
-    // 2. Build the list of items using your .cart-item grid layout
     let itemsHTML = '';
     cartIds.forEach(id => {
         const item = items.find(i => i.id === parseInt(id));
@@ -78,7 +76,6 @@ function renderCart() {
 
     const total = subtotal + DELIVERY_FEE;
 
-    // 3. Combine it all into the main .cart-container layout
     listContainer.innerHTML = `
         <div class="cart-container">
             <div class="cart-main">

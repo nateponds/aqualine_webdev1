@@ -1,4 +1,7 @@
+const DELIVERY_FEE = 50;
+window.DELIVERY_FEE = DELIVERY_FEE;
 window.cart = {};
+
 
 const items = [
   { id: 1, category: "gallon", name: "Standard Round", volume: "5 gal", price: 30.00, img: "round-gallon.png" },
@@ -105,6 +108,20 @@ function subtItemQty(id){
         renderProducts(currentFilter);
         if (typeof renderCart === "function") renderCart();
     }
+}
+
+function submitOrder(){
+    if(Object.keys(window.cart).length === 0){
+        alert("Your cart is empty!");
+        return;
+    }
+
+    const cartArray = Object.values(window.cart);
+
+    let finalTotal = DELIVERY_FEE;
+    cartArray.forEach(item => {
+        finalTotal += (item.price * item.quantity); 
+    });
 }
 
 localStorage.setItem('waterShopCart', JSON.stringify(window.cart));
