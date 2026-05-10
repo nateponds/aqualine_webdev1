@@ -116,16 +116,42 @@ function submitOrder(){
         return;
     }
 
-    const cartArray = Object.values(window.cart);
+    const customerName = document.getElementById('checkout-name').value;
+    const customerContact = document.getElementById('checkout-contact').value;
+    const customerAddress = document.getElementById('checkout-address').value;
+    const shipmentType = document.getElementById('checkout-shipment').value;
 
-    let finalTotal = DELIVERY_FEE;
-    cartArray.forEach(item => {
-        finalTotal += (item.price * item.quantity); 
+    if(!customerName || !customerContact || !customerAddress) {
+        alert("Please fill out all delivery details!");
+        return;
+    }
+
+    const cartArray = [];
+    let finalTotal = window.DELIVERY_FEE;
+
+    Object.keys(window.cart).forEach(id => {
+        const itemDetails = items.find(i => i.id === parseInt(id));
+        const qty = window.cart[id];
+        
+        finalTotal += (itemDetails.price * qty);
+
+        cartArray.push({
+            id: itemDetails.id,
+            name: itemDetails.name,
+            price: itemDetails.price,
+            qty: qty
+        });
     });
 
     const orderData = {
         cart: cartArray,
-        total: finalTotal
+        total: finalTotal,
+        customer_info: {
+            name: customerName,
+            contact: customerContact,
+            address: customerAddress,
+            shipment_type: shipmentType
+        }
     };
 
     fetch('checkout.php', {
@@ -139,11 +165,12 @@ function submitOrder(){
     .then(data => {
         if(data.status === 'success'){
             alert("Order placed successfully! Your Order ID is: " + data.order_id);
-        
-        window.cart = {};
-        closeCart();
-        renderCart();
-
+            
+            window.cart = {};
+            closeCheckoutModal();
+            closeCart();
+            renderCart();
+            renderProducts(currentFilter); 
         }
         else {
             alert("Error: " + data.message);
@@ -151,9 +178,8 @@ function submitOrder(){
     })
     .catch(error => {
         console.error("Fetch Error: ", error);
-        alert("Failed to connect to the server.");
+        alert("Failed to connect to the server. Check the console for details.");
     });
-
 }
 
 function openCheckoutModal(){
