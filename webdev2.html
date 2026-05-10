@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aqualine | Premium Water Delivery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Aqualine</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Company</a></li> <!--can be removable; basically an about us-->
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="#catalog" class="btn-touch">Order Now</a> <!--idk if should be redirect or js link to services section-->
+    </header>
+
+    <!--add image [right side] or like a carousel of sht we offer idek-->
+    <section class="hero">
+        <p>WELCOME TO AQUALINE</p>
+        <h1>Highest Quality Water Services.</h1>
+        <a href="#services" class="btn-service">OUR SERVICE &rarr;</a> 
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <i class="fas fa-flask"></i>
+            <h3>Healthy Composition</h3>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-droplet"></i>
+            <h3>100% Purity</h3>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-headset"></i>
+            <h3>24/7 Support</h3>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-truck"></i>
+            <h3>Delivery</h3>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="about-image" style="flex: 1;">
+            <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=1976&auto=format&fit=crop" alt="Purified Water">
+        </div>
+        <div class="about-content">
+            <h2 style="color: var(--primary-blue);">30 Years of Experience</h2>
+            <p>Aqualine has been the leading provider of clean, safe, and refreshing water delivery services in the Philippines. Our commitment to health and quality is unmatched.</p>
+            <br>
+            <a href="#" class="btn-touch">More About Us &rarr;</a> 
+            <!--^^can be removed but was thinking to link it to "company" sa header-->
+        </div>
+    </section>
+
+    <!--this section was supposed to have the grab UI pero gikapoy ko so lowk placeholder not really ang featuring sa services
+    i generated ideas ganina and cant unsee it, ako gi send nimo [chat]but idk if kapoy rba or wat-->
+    <section id="services" class="services"> 
+        <h2>Different Types of Services</h2> <!--tweawking rn bc its that late night rush but should we specify water services? like alkaline yada2-->
+        <div class="service-grid">
+            <div class="service-card">
+                <img src="" alt="Refills">
+                <div class="service-info"><h3>Refills</h3></div>
+            </div>
+            <div class="service-card">
+                <img src="" alt="Pick-Up">
+                <div class="service-info"><h3>Pick-Up</h3></div>
+            </div>
+            <div class="service-card">
+                <img src="" alt="Home Delivery">
+                <div class="service-info"><h3>Home Delivery</h3></div>
+            </div>
+             <div class="service-card">
+                <img src="" alt="Retail">
+                <div class="service-info"><h3>Retail</h3></div> <!--buy/sell bottles idk-->
+            </div>
+            <!--i was searching sht and other places offer cleaning supplies but idk-->
+        </div>
+    </section>
+
+    <!-- CATALOG this is the generated part -->
+    <section class="catalog" id="catalog">
+        <div class="catalog-header">
+            <div>
+                <div class="section-label" style="color: var(--primary-blue); font-weight: 700;">Water Shop</div>
+                <div class="section-title" style="font-size: 2rem; font-weight: 700;">Container Categories</div>
+            </div>
+            <a href="#" class="view-all">View all &rarr;</a>
+        </div>
+
+        <!-- START HERE RENDERING WITH JAVASCRIPT AND MYSQL -->
+        <div class="catalog-tabs"> <!-- JS WILL CHECK ON 4 CLASSES OF CATALOG TABS AND RENDER OUT PRODUCTS FROM THE SQL DATABASE BASED ON THAT -->
+             <!-- change to black is class tab active, class tab is white -->
+            <div class="tab active" data-category="all">All</div>
+             <div class="tab" data-category="gallon">Gallon</div>
+            <div class="tab" data-category="bottle">Bottle</div>
+            <div class="tab" data-category="slim">Slim</div>
+        </div>
+        <div class="products-grid">
+            <strong>If this is loaded in your JS is not doing anything</strong>
+        </div>
+
+    <div class="carousel-container">
+        <button class="nav-btn" onclick="moveCarousel(-1)">
+            <img src="left-arrow.png" alt="">
+        </button>
+    
+        <div class="products-grid">
+            <!--RENDER HERE THE PRODUCTS USING JAVASCRIPT-->
+        </div>
+
+        <button class="nav-btn" onclick="moveCarousel(1)">
+            <img src="right-arrow.png" alt="">
+        </button>
+    </div>  
+        <div style="text-align:center; margin-top: 2.5rem;">
+            <a href="#" class="btn-touch">Check Out &rarr;</a>
+        </div>
+    </section>
+    <!-- END HERE RENDERING WITH JS AND MYSQL -->
+
+
+    <!--insert contact us bs: number, email, chatbox??-->
+    <section id="contact" class="contact"> 
+        <h2>Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-item">
+                <i class="fas fa-phone-alt" style="color: var(--primary-blue);"></i>
+                <span>+63 123 456 7890</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope" style="color: var(--primary-blue);"></i>
+                <span>support@aqualine.ph</span>
+            </div>
+        </div>
+    </section>
+
+    <!--idk specific closest loc so ako gi ph lol-->
+    <section class="location-map">
+        <h2>Our Service Location</h2>
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7850810.198308434!2d117.48869153549727!3d12.879720788640097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x334191060937a09d%3A0xc34a5f4c478a8461!2sPhilippines!5e0!3m2!1sen!2sph!4v1715300000000!5m2!1sen!2sph" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo" style="color: var(--white);">Aqualine</div>
+        <h3>Aqualine - Customized Solution For Every Industry Needs!</h3>
+        <p>&copy; 2026 Aqualine Water Station Philippines. All rights reserved.</p>
+    </footer>
+
+    <script src="waterShop.js"></script>
+</body>
+</html>
