@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Summary</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f8ff;
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .summary-box {
+      background: white;
+      border: 1px solid #daeaf8;
+      border-radius: 12px;
+      padding: 1.5rem;
+      width: 380px;
+    }
+
+    .summary-box h3 {
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #daeaf8;
+      padding-bottom: 0.8rem;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    .item-name { color: #333; }
+    .item-price { font-weight: 600; }
+
+    hr {
+      border: none;
+      border-top: 1px solid #daeaf8;
+      margin: 1rem 0;
+    }
+
+    .cost-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      color: #5a7184;
+    }
+
+    .cost-row span:last-child { color: #0d1b2a; font-weight: 500; }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .shipping-row.hidden { display: none; }
+
+    .cod-notice {
+      display: none;
+      font-size: 0.82rem;
+      color: #16a34a;
+      margin-bottom: 0.5rem;
+    }
+    .cod-notice.visible { display: block; }
+
+    .receipt-header {
+      text-align: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed #daeaf8;
+    }
+
+    .receipt-header h3 {
+      border: none;
+      padding: 0;
+      margin-bottom: 0.3rem;
+    }
+
+    .receipt-header p {
+      font-size: 0.8rem;
+      color: #5a7184;
+    }
+
+    .receipt-info {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed #daeaf8;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .info-row span:first-child { color: #5a7184; }
+    .info-row span:last-child  { font-weight: 600; color: #0d1b2a; }
+
+    .dashed { border-top: 1px dashed #daeaf8; }
+
+    .confirm-btn {
+      width: 100%;
+      margin-top: 1.2rem;
+      padding: 0.8rem;
+      background: #0a1628;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .confirm-btn:hover { background: #1565C0; }
+  </style>
+</head>
+<body>
+
+  <div class="summary-box">
+
+    <div class="receipt-header">
+      <h3>Order Summary</h3>
+      <p>Aqualine Water Delivery</p>
+    </div>
+
+    <div class="receipt-info">
+      <div class="info-row">
+        <span>Order ID</span>
+        <span>#####</span>
+      </div>
+      <div class="info-row">
+        <span>Customer</span>
+        <span>####</span>
+      </div>
+      <div class="info-row">
+        <span>Date</span>
+        <span id="order-date"></span>
+      </div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Slim Gallon</span>
+      <span class="item-price">₱45</span>
+    </div>
+    <div class="item">
+      <span class="item-name">Round Gallon</span>
+      <span class="item-price">₱50</span>
+    </div>
+
+    <hr class="dashed">
+
+    <div class="cost-row">
+      <span>Subtotal</span>
+      <span>₱95</span>
+    </div>
+
+    <div class="cost-row shipping-row" id="shipping-row">
+      <span>Shipping Fee</span>
+      <span>₱40</span>
+    </div>
+
+    <div class="cod-notice" id="cod-notice">✓ No shipping fee for Cash on Delivery</div>
+
+    <hr class="dashed">
+
+    <div class="total-row">
+      <span>Total</span>
+      <span id="total-amount">₱135</span>
+    </div>
+
+    <button class="confirm-btn" onclick="confirmPayment()">Confirm Payment</button>
+  </div>
+
+</body>
+</html>

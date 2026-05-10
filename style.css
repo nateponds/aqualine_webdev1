@@ -67,15 +67,20 @@ nav ul li a:hover {
     color: var(--primary-blue);
 }
 
-.btn-touch {
+.btn-order {
     background: var(--primary-blue);
+    border: none;
     color: var(--white);
     padding: 10px 25px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: 600;
     display: inline-block;
+    cursor: pointer;
+    transition: 0.15s;
 }
+.btn-order:hover{ transform: translateY(-5px); box-shadow: 0 16px 40px rgba(21,101,192,0.2); transition: 0.3s;}
+
 
 .hero {
     background: linear-gradient(rgba(0, 51, 102, 0.6), rgba(0, 123, 255, 0.4)), 
@@ -256,8 +261,8 @@ nav ul li a:hover {
     transition: all 0.2s ease;
 }
 .nav-btn:hover {
-    background: #000;
-    border-color: #000;
+    background: var(--primary-blue);
+    /* border-color: #000; */
 }
 .nav-btn img {
     width: 1.2rem; 

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+   <style>
+        :root {
+            --primary-blue: #007bff;
+            --dark-blue: #003366;
+            --light-blue: #e3f2fd;
+            --text-color: #333;
+            --white: #ffffff;
+            --off: #f8f9fa;
+            --blue-mid: #1565C0;
+            --navy: #0d2347;
+            --muted: #6c757d;
+            --light-border: #dee2e6;
+            --sky: #e1f5fe;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--off);
+            color: var(--text-color);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cart-container {
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .cart-main {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--off);
+            margin-bottom: 20px;
+        }
+
+        .cart-header h1 {
+            font-size: 1.5rem;
+            color: var(--navy);
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 80px 2fr 1fr 100px 40px;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--off);
+        }
+
+        .item-img {
+            width: 80px;
+            height: 80px;
+            background: var(--sky);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue-mid);
+            font-size: 1.5rem;
+        }
+
+        .item-details h3 {
+            font-size: 1rem;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+
+        .item-details p {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--off);
+            padding: 5px 12px;
+            border-radius: 100px;
+            width: fit-content;
+        }
+
+        .qty-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        .item-price {
+            font-weight: 700;
+            color: var(--navy);
+            text-align: right;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #ff4757;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: 0.2s;
+        }
+
+        .remove-btn:hover { transform: scale(1.1); }
+
+        .cart-summary {
+            background: var(--navy);
+            color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            height: fit-content;
+            position: sticky;
+            top: 40px;
+        }
+
+        .summary-title {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .summary-total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            background: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 30px;
+            transition: 0.3s;
+        }
+
+        .empty-msg {
+            text-align: center;
+            padding: 50px 0;
+            color: var(--muted);
+        }
+
+        @media (max-width: 850px) {
+            .cart-container { grid-template-columns: 1fr; }
+            .cart-item { grid-template-columns: 60px 1fr 1fr; }
+            .item-price, .remove-btn { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cart-container">
+        <div class="cart-main">
+            <div class="cart-header">
+                <h1>Shopping Cart</h1>
+                <a href="#" class="back-link">← Continue Shopping</a>
+            </div>
+
+            <div id="cart-items-list">
+                </div>
+
+            <div id="empty-cart-message" class="empty-msg" style="display: none;">
+                <i class="fas fa-shopping-basket fa-3x" style="margin-bottom: 15px; opacity: 0.3;"></i>
+                <p>Your cart is currently empty.</p>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    <script>
+    
+        let cart = [
+            { id: 1, name: "Slim Gallon", price: 150, qty: 2, icon: "fa-faucet-drip" },
+            { id: 2, name: "Round Gallon (500ml Case)", price: 320, qty: 1, icon: "fa-bottle-water" }
+        ];
+
+        const DELIVERY_FEE = 50;
+
+        function renderCart() {
+            const listContainer = document.getElementById('cart-items-list');
+            const emptyMsg = document.getElementById('empty-cart-message');
+            
+            if (cart.length === 0) {
+                listContainer.innerHTML = '';
+                emptyMsg.style.display = 'block';
+                updateSummary(0);
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+            listContainer.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="item-img">
+                        <i class="fas ${item.icon}"></i>
+                    </div>
+                    <div class="item-details">
+                        <h3>${item.name}</h3>
+                        <p>Unit Price: ₱${item.price}</p>
+                    </div>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+                        <span>${item.qty}</span>
+                        <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+                    </div>
+                    <div class="item-price">₱${(item.price * item.qty).toLocaleString()}</div>
+                    <button class="remove-btn" onclick="removeItem(${item.id})">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            updateSummary(subtotal);
+        }
+
+        function updateQty(id, change) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += change;
+                if (item.qty < 1) removeItem(id);
+                else renderCart();
+            }
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            renderCart();
+        }
+
+        function updateSummary(subtotal) {
+            const total = subtotal > 0 ? (subtotal + DELIVERY_FEE) : 0;
+
+            document.getElementById('subtotal').innerText = `₱${subtotal.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            document.getElementById('grand-total').innerText = `₱${total.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+        }
+
+        renderCart();
+    </script>
+
+</body>
+</html>

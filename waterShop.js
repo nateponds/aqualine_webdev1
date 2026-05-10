@@ -1,11 +1,16 @@
+window.cart = window.cart || {};
+
+window.cart = JSON.parse(localStorage.getItem('waterShopCart')) || {};
+
 const items = [
   { id: 1, category: "gallon", name: "Standard Round", volume: "5 gal", price: 30.00, img: "round-gallon.png" },
   { id: 2, category: "gallon", name: "Slim Alkaline",  volume: "5 gal", price: 45.00, img: "slim-gallon.png" },
   { id: 3, category: "bottle", name: "Solo Mist",      volume: "500ml", price: 12.00, img: "solo-mist.png" },
   { id: 4, category: "bottle", name: "Family Pack",    volume: "1.5L",  price: 18.00, img: "family-pack.png" },
   { id: 5, category: "slim",   name: "Office Tower",   volume: "10L",   price: 25.00, img: "office-slim.png" },
-  { id: 6, category: "slim",   name: "Compact Home",   volume: "8L",    price: 22.00, img: "home-slim.png" }
+  { id: 6, category: "slim",   name: "Compact Home",   volume: "8L",    price: 22.00, img: "home-slim.png" },
 ];
+
 
 const tabs = document.querySelectorAll('.tab');
 const productsGrid = document.querySelector('.products-grid');
@@ -19,6 +24,7 @@ function getActiveItems() {
 }
 
 function renderProducts(filter = "all"){
+    currentFilter = filter;
     productsGrid.innerHTML = "<p>Loading items...</p>";
 
     const filteredItems = getActiveItems();
@@ -42,12 +48,12 @@ function renderProducts(filter = "all"){
             </div>
             <div class="product-body">
                 <h3>${item.name}</h3>
-                <div class="sub">Volume: ${item.volume} L</div>
+                <div class="sub">Volume: ${item.volume}</div>
                 <div class="product-footer">
                     <div class="price">₱${item.price} <small>/unit</small></div>
                     <div class="qty-control">
-                        <button class="qty-btn" onclick="subItemQty(${item.id})">−</button>
-                        <span class="qty-num">0</span>
+                        <button class="qty-btn" onclick="subtItemQty(${item.id})">−</button>
+                        <span class="qty-num">${window.cart[item.id] || 0}</span>
                         <button class="qty-btn" onclick="addItemQty(${item.id})">+</button>
                     </div>
                 </div>
@@ -79,26 +85,32 @@ tabs.forEach(tab => {
 });
 
 function moveCarousel(x_direction){
-    const filteredItems = currentFilter === "all"
-        ? items
-        : items.filter(item => item.category === currentFilter);
+    const filteredItems = getActiveItems();
 
     const newIndex = currentIndex + x_direction;
 
-    if (newIndex >= 0 && newIndex <= activeList.length - 2) {
+    if (newIndex >= 0 && newIndex < filteredItems.length) {
         currentIndex = newIndex;
         renderProducts(currentFilter);
     }
 }
 
 function addItemQty(id){
-
+    window.cart[id] = (window.cart[id] || 0) + 1;
+    renderProducts(currentFilter);
+    if (typeof renderCart === "function") renderCart();
 }
 
 function subtItemQty(id){
-
+    if (window.cart[id] && window.cart[id] > 0) {
+        window.cart[id]--;
+        if (window.cart[id] === 0) delete window.cart[id];
+        renderProducts(currentFilter);
+        if (typeof renderCart === "function") renderCart();
+    }
 }
 
+localStorage.setItem('waterShopCart', JSON.stringify(window.cart));
 
 
 

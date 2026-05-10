@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="import" href="cartStyle.css">
 </head>
 <body>
-
     <header>
         <div class="logo">Aqualine</div>
         <nav>
@@ -20,7 +20,6 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-        <a href="#catalog" class="btn-touch">Order Now</a> <!--idk if should be redirect or js link to services section-->
     </header>
 
     <!--add image [right side] or like a carousel of sht we offer idek-->
@@ -94,7 +93,6 @@
                 <div class="section-label" style="color: var(--primary-blue); font-weight: 700;">Water Shop</div>
                 <div class="section-title" style="font-size: 2rem; font-weight: 700;">Container Categories</div>
             </div>
-            <a href="#" class="view-all">View all &rarr;</a>
         </div>
 
         <!-- START HERE RENDERING WITH JAVASCRIPT AND MYSQL -->
@@ -109,21 +107,31 @@
             <strong>If this is loaded in your JS is not doing anything</strong>
         </div>
 
-    <div class="carousel-container">
-        <button class="nav-btn" onclick="moveCarousel(-1)">
-            <img src="left-arrow.png" alt="">
-        </button>
-    
-        <div class="products-grid">
-            <!--RENDER HERE THE PRODUCTS USING JAVASCRIPT-->
+        <div class="carousel-container">
+            <button class="nav-btn" onclick="moveCarousel(-1)">
+                <img src="left-arrow.png" alt="">
+                <!-- &larr; -->
+            </button>
+        
+            <div class="products-grid">
+                <!--RENDER HERE THE PRODUCTS USING JAVASCRIPT-->
+            </div>
+
+            <button class="nav-btn" onclick="moveCarousel(1)">
+                <img src="right-arrow.png" alt="">
+                <!-- &rarr; -->
+            </button>
+        </div>
+        <div style="text-align:center; margin-top: 2.5rem;">
+            <button class="btn-order" onclick="renderCart()">Order Now &rarr;</button>
         </div>
 
-        <button class="nav-btn" onclick="moveCarousel(1)">
-            <img src="right-arrow.png" alt="">
-        </button>
-    </div>  
-        <div style="text-align:center; margin-top: 2.5rem;">
-            <a href="#" class="btn-touch">Check Out &rarr;</a>
+            
+        <div class="cart-panel">
+        <!-- CART AND PRODUCTS WILL BE LAID OUT HERE -->
+
+        </div>
+
         </div>
     </section>
     <!-- END HERE RENDERING WITH JS AND MYSQL -->
@@ -162,5 +170,6 @@
     </footer>
 
     <script src="waterShop.js"></script>
+    <script src="cart.js"></script>
 </body>
 </html>
