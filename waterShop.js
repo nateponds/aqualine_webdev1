@@ -1,7 +1,4 @@
-const DELIVERY_FEE = 50;
-window.DELIVERY_FEE = DELIVERY_FEE;
 window.cart = {};
-
 
 const items = [
   { id: 1, category: "gallon", name: "Standard Round", volume: "5 gal", price: 30.00, img: "round-gallon.png" },
@@ -110,53 +107,9 @@ function subtItemQty(id){
     }
 }
 
-function submitOrder(){
-    if(Object.keys(window.cart).length === 0){
-        alert("Your cart is empty!");
-        return;
-    }
-
-    const cartArray = Object.values(window.cart);
-
-    let finalTotal = DELIVERY_FEE;
-    cartArray.forEach(item => {
-        finalTotal += (item.price * item.quantity); 
-    });
-
-    const orderData = {
-        cart: cartArray,
-        total: finalTotal
-    };
-
-    fetch('checkout.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(orderData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if(data.status === 'success'){
-            alert("Order placed successfully! Your Order ID is: " + data.order_id);
-        
-        window.cart = {};
-        closeCart();
-        renderCart();
-
-        }
-        else {
-            alert("Error: " + data.message);
-        }
-    })
-    .catch(error => {
-        console.error("Fetch Error: ", error);
-        alert("Failed to connect to the server.");
-    });
-
-}
-
 localStorage.setItem('waterShopCart', JSON.stringify(window.cart));
 
 
+
+// Initial load
 renderProducts('all');
