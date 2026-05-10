@@ -18,7 +18,7 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="javascript:void(0)" id="adminBtn">Admin</a></li>
+                <li><a href="javascript:void(0)" onclick="openAdminModal()">Admin</a></li>
             </ul>
         </nav>
     </header>
@@ -154,8 +154,26 @@
         </div>
     </section>
 
-    <!--admin login ting-->
-    <div id="loginModal" class="modal-overlay">
+    <!-- admin login ting-->
+    <div id="loginModal" class="admin-overlay" onclick="closeAdminModalOutside(event)">
+        <div class="admin-content">
+            <span class="close-admin" onclick="closeAdminModal()">&times;</span>
+            <h2>Admin Login</h2>
+            <form id="loginForm" onsubmit="handleAdminLogin(event)">
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="Enter username" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn-order" style="width: 100%; margin-top: 10px;">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- <div id="loginModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2>Admin Login</h2>
@@ -171,11 +189,11 @@
                 <button type="submit" class="btn-order" style="width: 100%; margin-top: 10px;">Login</button>
             </form>
         </div>
-    </div>
+    </div> -->
 
     <!-- THE FLOATING CHECKOUT FORM -->
-    <div id="checkout-modal" class="modal-overlay">
-        <div class="modal-content">
+    <div id="checkout-modal" class="checkout-overlay">
+        <div class="checkout-content">
             <span class="close-btn" onclick="closeCheckoutModal()">&times;</span>
             
             <h3 style="margin-top: 0;">Delivery Details</h3>

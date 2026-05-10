@@ -15,7 +15,7 @@
     $client_name = $orderData['customer_info']['name'];
     $client_contact = $orderData['customer_info']['contact'];
     $client_address = $orderData['customer_info']['address'];
-    $shipment_type = $orderData['customer_info']['type'];
+    $shipment_type = $orderData['customer_info']['shipment_type'];
 
     $order_date = date("Y-m-d");
     $total_amount = $orderData['total'];

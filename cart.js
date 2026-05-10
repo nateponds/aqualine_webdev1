@@ -53,7 +53,7 @@ function renderCart() {
         itemsHTML += `
             <div class="cart-item">
                 <div class="item-img">
-                    <img src="${item.img}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: contain; padding: 5px;">
+                    <img src="images/${item.img}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: contain; padding: 5px;">
                 </div>
                 <div class="item-details">
                     <h3>${item.name}</h3>
