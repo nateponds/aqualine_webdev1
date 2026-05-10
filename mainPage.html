@@ -19,12 +19,11 @@
                 <li><a href="#">Company</a></li> <!--can be removable; basically an about us-->
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="#">Admin</a></li>
+                <li><a href="javascript:void(0)" id="adminBtn">Admin</a></li>
             </ul>
         </nav>
     </header>
 
-    <!--add image [right side] or like a carousel of sht we offer idek-->
     <section class="hero">
         <p>WELCOME TO AQUALINE</p>
         <h1>Highest Quality Water Services.</h1>
@@ -62,33 +61,29 @@
             <!--^^can be removed but was thinking to link it to "company" sa header-->
         </div>
     </section>
-
-    <!--this section was supposed to have the grab UI pero gikapoy ko so lowk placeholder not really ang featuring sa services
-    i generated ideas ganina and cant unsee it, ako gi send nimo [chat]but idk if kapoy rba or wat-->
+    
     <section id="services" class="services"> 
-        <h2>Different Types of Services</h2> <!--tweawking rn bc its that late night rush but should we specify water services? like alkaline yada2-->
+        <h2>Different Types of Services</h2> 
         <div class="service-grid">
             <div class="service-card">
-                <img src="" alt="Refills">
+                 <i class="fas fa-tint" alt="Refills"></i>
                 <div class="service-info"><h3>Refills</h3></div>
             </div>
             <div class="service-card">
-                <img src="" alt="Pick-Up">
+              <i class="fas fa-store" alt="Pick-Up"></i>
                 <div class="service-info"><h3>Pick-Up</h3></div>
             </div>
             <div class="service-card">
-                <img src="" alt="Home Delivery">
+               <i class="fas fa-truck-ramp-box" alt="Home Delivery"></i>
                 <div class="service-info"><h3>Home Delivery</h3></div>
             </div>
              <div class="service-card">
-                <img src="" alt="Retail">
-                <div class="service-info"><h3>Retail</h3></div> <!--buy/sell bottles idk-->
+                <i class="fas fa-tags" alt="Retail"></i>
+                <div class="service-info"><h3>Retail</h3></div> 
             </div>
-            <!--i was searching sht and other places offer cleaning supplies but idk-->
         </div>
     </section>
 
-    <!-- CATALOG this is the generated part -->
     <section class="catalog" id="catalog">
         <div class="catalog-header">
             <div>
@@ -164,6 +159,24 @@
         </div>
     </section>
 
+    <div id="loginModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Enter username" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="btn-order" style="width: 100%; margin-top: 10px;">Login</button>
+        </form>
+    </div>
+</div>
+    
     <footer>
         <div class="logo" style="color: var(--white);">Aqualine</div>
         <h3>Aqualine - Customized Solution For Every Industry Needs!</h3>
@@ -198,5 +211,6 @@
 
     <script src="waterShop.js"></script>
     <script src="cart.js"></script>
+    <script src="admin.js"></script>
 </body>
 </html>
