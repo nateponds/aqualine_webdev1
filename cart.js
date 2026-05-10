@@ -3,12 +3,12 @@ const DELIVERY_FEE = 50;
 function openAndRenderCart() {
     const panel = document.querySelector('.cart-panel');
     
-    if (panel.classList.contains('active')) {
-        closeCart();
-    } else {
+    // if (panel.classList.contains('active')) {
+    //     closeCart();
+    // } else {
         panel.classList.add('active');
         renderCart();
-    }
+    // }
 }
 
 function closeCart() {

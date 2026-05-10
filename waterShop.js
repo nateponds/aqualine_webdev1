@@ -1,7 +1,5 @@
 window.cart = {};
 
-window.cart = JSON.parse(localStorage.getItem('waterShopCart')) || {};
-
 const items = [
   { id: 1, category: "gallon", name: "Standard Round", volume: "5 gal", price: 30.00, img: "round-gallon.png" },
   { id: 2, category: "gallon", name: "Slim Alkaline",  volume: "5 gal", price: 45.00, img: "slim-gallon.png" },
@@ -44,7 +42,6 @@ function renderProducts(filter = "all"){
         <div class="product-card"> <!-- whole cell that the database will render out. should be stripped out in static html -->
             <div class="product-img">
                 <img src="images/${item.img}" alt="${item.img}">
-                <!-- bottle image goes here use above code snippet for JAVASCRIPT -->
             </div>
             <div class="product-body">
                 <h3>${item.name}</h3>
