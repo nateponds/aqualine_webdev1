@@ -1,5 +1,3 @@
-
-
 function openAndRenderCart() {
     const panel = document.querySelector('.cart-panel');
     

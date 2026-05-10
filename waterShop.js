@@ -122,11 +122,41 @@ function submitOrder(){
     cartArray.forEach(item => {
         finalTotal += (item.price * item.quantity); 
     });
+
+    const orderData = {
+        cart: cartArray,
+        total: finalTotal
+    };
+
+    fetch('checkout.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === 'success'){
+            alert("Order placed successfully! Your Order ID is: " + data.order_id);
+        
+        window.cart = {};
+        closeCart();
+        renderCart();
+
+        }
+        else {
+            alert("Error: " + data.message);
+        }
+    })
+    .catch(error => {
+        console.error("Fetch Error: ", error);
+        alert("Failed to connect to the server.");
+    });
+
 }
 
 localStorage.setItem('waterShopCart', JSON.stringify(window.cart));
 
 
-
-// Initial load
 renderProducts('all');
