@@ -5,6 +5,8 @@
     --light-blue: #e3f2fd;
     --text-color: #333;
     --white: #ffffff;
+
+    /* additional chu2 for the ai part */
     --off: #f8f9fa;
     --blue-mid: #1565C0;
     --navy: #0d2347;
@@ -178,7 +180,8 @@ nav ul li a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;  
+    overflow: hidden;
+    
 }
 
 .service-card i {
@@ -201,6 +204,7 @@ nav ul li a:hover {
     align-items: center;
 }
 
+/*start of the ai generated thing*/
 .catalog {
     padding: 6rem 5%;
     background: var(--off);
@@ -318,7 +322,6 @@ nav ul li a:hover {
     height: 365px;
     object-fit: contain;
 }
-
 .product-img svg { width: 90px; height: 90px; }
 
 .product-badge {
@@ -369,6 +372,7 @@ nav ul li a:hover {
 
 .qty-btn:hover { background: var(--sky); }
 .qty-num { font-weight: 700; font-size: 0.95rem; min-width: 16px; text-align: center; }
+/*end of ai shit*/
 
 .contact {
     padding: 80px 10%;
@@ -479,6 +483,8 @@ footer {
     border-radius: 8px;
     font-family: inherit;
 }
+
+
 
 
 
