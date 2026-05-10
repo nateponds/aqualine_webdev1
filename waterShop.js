@@ -1,4 +1,4 @@
-window.cart = window.cart || {};
+window.cart = {};
 
 window.cart = JSON.parse(localStorage.getItem('waterShopCart')) || {};
 

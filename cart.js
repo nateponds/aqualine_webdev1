@@ -1,83 +1,122 @@
-let cart = [
-    { id: 1, name: "Slim Gallon", price: 150, qty: 2, icon: "fa-faucet-drip" },
-    { id: 2, name: "Round Gallon (500ml Case)", price: 320, qty: 1, icon: "fa-bottle-water" }
-];
-
 const DELIVERY_FEE = 50;
 
-function openCartPanel() {
+function openAndRenderCart() {
     const panel = document.querySelector('.cart-panel');
     
-    panel.classList.add('active'); 
-
-    if (typeof renderCart === "function") {
-        renderCart();
+    if (panel.classList.contains('active')) {
+        closeCart();
     } else {
-        console.error("renderCart function not found! Make sure cart.js is loaded.");
+        panel.classList.add('active');
+        renderCart();
     }
+}
+
+function closeCart() {
+    const panel = document.querySelector('.cart-panel');
+    
+    panel.classList.add('closing');
+    
+    setTimeout(() => {
+        panel.classList.remove('active');
+        panel.classList.remove('closing'); 
+    }, 300); 
 }
 
 function renderCart() {
-    const listContainer = document.getElementById('cart-items-list');
-    const emptyMsg = document.getElementById('empty-cart-message');
-    
+    const listContainer = document.querySelector('.cart-panel');
     const cartIds = Object.keys(window.cart);
 
-    if (cart.length === 0) {
-        listContainer.innerHTML = '';
-        emptyMsg.style.display = 'block';
-        updateSummary(0);
+    // 1. Handle Empty State using your .empty-msg class
+    if (cartIds.length === 0) {
+        listContainer.innerHTML = `
+            <div class="cart-container" style="grid-template-columns: 1fr;">
+                <div class="cart-main">
+                    <div class="cart-header">
+                        <h1>Shopping Cart</h1>
+                        <button onclick="closeCart()" class="remove-btn"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="empty-msg">
+                        <i class="fas fa-shopping-basket fa-3x" style="margin-bottom: 15px; opacity: 0.3;"></i>
+                        <p>Your cart is currently empty. Add some items first!</p>
+                    </div>
+                </div>
+            </div>
+        `;
         return;
     }
 
-    if (emptyMsg) emptyMsg.style.display = 'none';
-
-    listContainer.innerHTML = cartIds.map(id => {
+    let subtotal = 0;
+    
+    // 2. Build the list of items using your .cart-item grid layout
+    let itemsHTML = '';
+    cartIds.forEach(id => {
         const item = items.find(i => i.id === parseInt(id));
         const qty = window.cart[id];
+        subtotal += (item.price * qty);
         
-        return `
+        itemsHTML += `
             <div class="cart-item">
+                <div class="item-img">
+                    <img src="${item.img}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: contain; padding: 5px;">
+                </div>
                 <div class="item-details">
                     <h3>${item.name}</h3>
-                    <p>Unit Price: ₱${item.price}</p>
+                    <p>Unit Price: ₱${item.price.toFixed(2)}</p>
                 </div>
                 <div class="qty-control">
-                    <button class="qty-btn" onclick="addItemQty(${item.id})">+</button>
+                    <button class="qty-btn" onclick="subtItemQty(${item.id})">−</button>
                     <span>${qty}</span>
-                    <button class="qty-btn" onclick="subtItemQty(${item.id})">-</button>
+                    <button class="qty-btn" onclick="addItemQty(${item.id})">+</button>
                 </div>
-                <div class="item-price">₱${(item.price * qty).toLocaleString()}</div>
+                <div class="item-price">₱${(item.price * qty).toFixed(2)}</div>
+                <button class="remove-btn" onclick="removeEntireItem(${item.id})">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
             </div>
         `;
-    }).join('');
+    });
 
-    const subtotal = cartIds.reduce((acc, id) => {
-        const item = items.find(i => i.id === parseInt(id));
-        return acc + (item.price * window.cart[id]);
-    }, 0);
-    updateSummary(subtotal);
+    const total = subtotal + DELIVERY_FEE;
+
+    // 3. Combine it all into the main .cart-container layout
+    listContainer.innerHTML = `
+        <div class="cart-container">
+            <div class="cart-main">
+                <div class="cart-header">
+                    <h1>Shopping Cart</h1>
+                    <a href="#" class="back-link" onclick="closeCart(); return false;">← Continue Shopping</a>
+                </div>
+                <div id="cart-items-list">
+                    ${itemsHTML}
+                </div>
+            </div>
+            
+            <div class="cart-summary">
+                <h2 class="summary-title">Order Summary</h2>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>₱${subtotal.toFixed(2)}</span>
+                </div>
+                <div class="summary-row">
+                    <span>Delivery Fee</span>
+                    <span>₱${DELIVERY_FEE.toFixed(2)}</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span>₱${total.toFixed(2)}</span>
+                </div>
+                <button class="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    `;
 }
 
-function updateQty(id, change) {
-    const item = window.cart.find(i => i.id === id);
-    if (item) {
-        item.qty += change;
-        if (item.qty < 1) removeItem(id);
-        else renderCart();
-    }
-}
-
-function removeItem(id) {
-    window.cart = window.cart.filter(item => item.id !== id);
+// Helper function to wire up the Trash Can icon
+function removeEntireItem(id) {
+    delete window.cart[id]; // Remove from global state
+    localStorage.setItem('waterShopCart', JSON.stringify(window.cart)); // Save to storage
+    
+    // Refresh both the shop grid numbers and the cart UI
+    if (typeof renderProducts === "function") renderProducts(currentFilter);
     renderCart();
 }
-
-function updateSummary(subtotal) {
-    const total = subtotal > 0 ? (subtotal + DELIVERY_FEE) : 0;
-
-    document.getElementById('subtotal').innerText = `₱${subtotal.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
-    document.getElementById('grand-total').innerText = `₱${total.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
-}
-
-renderCart();
