@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="cartStyle.css">
+    <link rel="stylesheet" href="checkoutFormStyle.css">
 </head>
 <body>
     <header>
@@ -168,6 +169,32 @@
         <h3>Aqualine - Customized Solution For Every Industry Needs!</h3>
         <p>&copy; 2026 Aqualine Water Station Philippines. All rights reserved.</p>
     </footer>
+
+    <!-- THE FLOATING CHECKOUT FORM -->
+    <div id="checkout-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCheckoutModal()">&times;</span>
+            
+            <h3 style="margin-top: 0;">Delivery Details</h3>
+            
+            <label>Full Name:</label>
+            <input type="text" id="checkout-name" placeholder="E.g. Juan Dela Cruz" required>
+            
+            <label>Phone Number:</label>
+            <input type="text" id="checkout-contact" placeholder="09xxxxxxxxx" required>
+            
+            <label>Address:</label>
+            <input type="text" id="checkout-address" placeholder="San Jose Ma. Village, Minglanilla, Cebu" required>
+            
+            <label>Order Type:</label>
+            <select id="checkout-shipment">
+                <option value="delivery">Delivery</option>
+                <option value="pickup">Store Pickup</option>
+            </select>
+
+            <button class="btn-order" onclick="submitOrder()" style="width: 100%; margin-top: 20px;">Confirm & Place Order</button>
+        </div>
+    </div>
 
     <script src="waterShop.js"></script>
     <script src="cart.js"></script>

@@ -156,6 +156,19 @@ function submitOrder(){
 
 }
 
+function openCheckoutModal(){
+    if (Object.keys(window.cart).length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    document.getElementById('checkout-modal').classList.add('active');
+}
+
+function closeCheckoutModal(){
+    document.getElementById('checkout-modal').classList.remove('active');
+}
+
 localStorage.setItem('waterShopCart', JSON.stringify(window.cart));
 
 

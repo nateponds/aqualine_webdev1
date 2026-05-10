@@ -100,7 +100,7 @@ function renderCart() {
                     <span>Total</span>
                     <span>₱${total.toFixed(2)}</span>
                 </div>
-                <button class="checkout-btn">Proceed to Checkout</button>
+                <button class="checkout-btn" onclick="openCheckoutModal()">Proceed to Checkout</button>
             </div>
         </div>
     `;
