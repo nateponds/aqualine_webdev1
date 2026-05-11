@@ -1,55 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aqualine | Admin Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="admin_pov.css">
-</head>
-<body>
-
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="admin_pov.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="view_more.css  " />
+  </head>
+  <body>
     <div class="header">
-        Admin: Administrator<br>
-        System: Aqualine Delivery Management<br>
-        <button onclick="window.location.href='mainPage.html'" style="background: red; color: white; border: none; padding: 5px 10px; margin-top: 5px; cursor: pointer; font-weight: bold;">Logout</button>
+      Admin: Administrator<br />
+      System: Aqualine Delivery Management<br />
+      <button
+        onclick="window.location.href = 'mainPage.html'"
+        style="
+          background: red;
+          color: white;
+          border: none;
+          padding: 5px 10px;
+          margin-top: 5px;
+          cursor: pointer;
+          font-weight: bold;
+        "
+      >
+        Logout
+      </button>
     </div>
 
     <div class="admin-container">
-        <h2>AQUALINE DELIVERY ORDERS</h2>
+      <h2>AQUALINE DELIVERY ORDERS</h2>
 
-        <div class="table-responsive" style="overflow-x: auto;">
-            <table class="order-table">
-                <thead>
-                    <tr>
-                        <th>ORDER ID</th>
-                        <th>CUSTOMER NAME</th>
-                        <th>ORDER DATE</th>
-                        <th>PRODUCT INFO</th>
-                        <th>TOTAL PRICE</th>
-                        <th>ADDRESS</th>
-                        <th>CONTACT NO.</th>
-                        <th>STATUS</th>
-                        <th>ACTION</th>
-                    </tr>
-                </thead>
-                <tbody id="orderTableBody">
-                    </tbody>
-            </table>
-        </div>
+      <div class="table-responsive" style="overflow-x: auto">
+        <table class="order-table">
+          <thead>
+            <tr>
+              <th>ORDER ID</th>
+              <th>CUSTOMER NAME</th>
+              <th>ORDER DATE</th>
+              <th>PRODUCT INFO</th>
+              <th>TOTAL PRICE</th>
+              <th>ADDRESS</th>
+              <th>CONTACT NO.</th>
+              <th>STATUS</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody id="orderTableBody"></tbody>
+        </table>
+      </div>
     </div>
 
-    <div id="summaryModal" class="admin-overlay" style="display:none;" onclick="closeSummaryOutside(event)">
-    
-        <div class="order-card" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="closeSummaryModal()">&times;</span>
-            <h3>Orders Summary</h3>
-            
-            <div id="summaryItemsList"></div>
-        </div>
-    </div>
+    <div
+      id="summaryModal"
+      class="admin-overlay"
+      onclick="closeSummaryOutside(event)"
+    >
+      <div class="order-card" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="closeSummaryModal()">&times;</span>
+        <h3>Orders Summary</h3>
 
+        <div id="summaryItemsList"></div>
+      </div>
+    </div>
 
     <script src="admin_pov.js"></script>
-</body>
+  </body>
 </html>
