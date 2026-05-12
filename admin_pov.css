@@ -9,7 +9,7 @@
   --status-done: #28a745;
 }
 
-body {
+/* body {
   background-color: var(--sky-bg);
   padding: 30px;
   font-family: "Poppins", sans-serif;
@@ -17,6 +17,17 @@ body {
 
   display: flex;
   flex-direction: column;
+} */
+
+body {
+  background-color: var(--sky-bg);
+  padding: 30px;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  display: block;
+  height: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .header {
@@ -69,18 +80,49 @@ input {
     transition: 0.5s;
 } */
 
-.admin-overlay {
-  position: absolute;
-  background: red !important;
+.order_summOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
-.admin-container {
-  max-width: 200vh;
+/* .admin-container {
+  max-width: 1600px;
+  width: 95%;
   margin: 0 auto;
   background: var(--white);
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+} */
+
+.admin-container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: var(--white);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  overflow: visible;
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 20px;
+  box-sizing: border-box;
 }
 
 h2 {
@@ -97,6 +139,8 @@ h2 {
   border-collapse: separate;
   border-spacing: 0;
   margin-top: 10px;
+  table-layout: fixed;
+  min-width: 1200px;
 }
 
 .order-table th {
@@ -157,4 +201,91 @@ h2 {
 
 .btn-delete:hover {
   background-color: #cc0000;
+}
+
+.order-table select {
+  padding: 8px 12px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--white);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  color: var(--primary-blue);
+}
+
+.btn-summary,
+.btn-cancel {
+  padding: 7px 14px;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-summary {
+  background-color: var(--accent-blue);
+  color: white;
+}
+
+.btn-summary:hover {
+  background-color: #0056cc;
+}
+
+.btn-cancel {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #cc0000;
+}
+
+.order-card {
+  background-color: var(--white);
+  width: 350px;
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid var(--primary-blue);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-blue);
+  cursor: pointer;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  color: #ff4d4d;
+}
+
+#summaryItemsList p {
+  background-color: #f4f4f4;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 8px 0;
+  color: #333;
+  font-weight: 500;
+  border-left: 4px solid var(--primary-blue);
+}
+
+.logout-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  font-weight: bold;
 }

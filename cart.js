@@ -1,31 +1,31 @@
 function openAndRenderCart() {
-    const panel = document.querySelector('.cart-panel');
-    
-    if (panel.classList.contains('active')) {
-        closeCart();
-    } else {
-        panel.classList.add('active');
-        renderCart();
-    }
+  const panel = document.querySelector(".cart-panel");
+
+  if (panel.classList.contains("active")) {
+    closeCart();
+  } else {
+    panel.classList.add("active");
+    renderCart();
+  }
 }
 
 function closeCart() {
-    const panel = document.querySelector('.cart-panel');
-    
-    panel.classList.add('closing');
-    
-    setTimeout(() => {
-        panel.classList.remove('active');
-        panel.classList.remove('closing'); 
-    }, 300); 
+  const panel = document.querySelector(".cart-panel");
+
+  panel.classList.add("closing");
+
+  setTimeout(() => {
+    panel.classList.remove("active");
+    panel.classList.remove("closing");
+  }, 300);
 }
 
 function renderCart() {
-    const listContainer = document.querySelector('.cart-panel');
-    const cartIds = Object.keys(window.cart);
+  const listContainer = document.querySelector(".cart-panel");
+  const cartIds = Object.keys(window.cart);
 
-    if (cartIds.length === 0) {
-        listContainer.innerHTML = `
+  if (cartIds.length === 0) {
+    listContainer.innerHTML = `
             <div class="cart-container" style="grid-template-columns: 1fr;">
                 <div class="cart-main">
                     <div class="cart-header">
@@ -39,18 +39,18 @@ function renderCart() {
                 </div>
             </div>
         `;
-        return;
-    }
+    return;
+  }
 
-    let subtotal = 0;
-    
-    let itemsHTML = '';
-    cartIds.forEach(id => {
-        const item = items.find(i => i.id === parseInt(id));
-        const qty = window.cart[id];
-        subtotal += (item.price * qty);
-        
-        itemsHTML += `
+  let subtotal = 0;
+
+  let itemsHTML = "";
+  cartIds.forEach((id) => {
+    const item = items.find((i) => i.id === parseInt(id));
+    const qty = window.cart[id];
+    subtotal += item.price * qty;
+
+    itemsHTML += `
             <div class="cart-item">
                 <div class="item-img">
                     <img src="images/${item.img}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: contain; padding: 5px;">
@@ -70,11 +70,16 @@ function renderCart() {
                 </button>
             </div>
         `;
-    });
+  });
 
-    const total = subtotal + DELIVERY_FEE;
+  const orderType = document.getElementById("checkout-address");
 
-    listContainer.innerHTML = `
+  const total = subtotal + DELIVERY_FEE;
+  //   if (orderType == "Delivery") {
+  //     total = subtotal + DELIVERY_FEE;
+  //   }
+
+  listContainer.innerHTML = `
         <div class="cart-container">
             <div class="cart-main">
                 <div class="cart-header">
@@ -102,16 +107,17 @@ function renderCart() {
                 </div>
                 <button class="checkout-btn" onclick="openCheckoutModal()">Proceed to Checkout</button>
             </div>
+
         </div>
     `;
 }
 
 // Helper function to wire up the Trash Can icon
 function removeEntireItem(id) {
-    delete window.cart[id]; // Remove from global state
-    localStorage.setItem('waterShopCart', JSON.stringify(window.cart)); // Save to storage
-    
-    // Refresh both the shop grid numbers and the cart UI
-    if (typeof renderProducts === "function") renderProducts(currentFilter);
-    renderCart();
+  delete window.cart[id]; // Remove from global state
+  localStorage.setItem("waterShopCart", JSON.stringify(window.cart)); // Save to storage
+
+  // Refresh both the shop grid numbers and the cart UI
+  if (typeof renderProducts === "function") renderProducts(currentFilter);
+  renderCart();
 }
