@@ -96,8 +96,8 @@ function renderProducts(filter = "all") {
                     <div class="price">₱${item.price} <small>/unit</small></div>
                     <div class="qty-control">
                         <button class="qty-btn" onclick="subtItemQty(${item.id})">−</button>
-                        <span class="qty-num">${window.cart[item.id] || 0}</span>
-                        <!-- <input type="number" class="qty-num" value={$window.cart[item.id] || 0} onchange="updateItemQty(${item.id}, this.value)"> -->
+                        <!-- <span class="qty-num">${window.cart[item.id] || 0}</span> -->
+                        <input type="number" class="qty-num" min="0" value="${window.cart[item.id] || 0}" onchange="updateItemQty(${item.id}, this.value)">
                         <button class="qty-btn" onclick="addItemQty(${item.id})">+</button>
                     </div>
                 </div>
@@ -140,18 +140,20 @@ function moveCarousel(x_direction) {
   }
 }
 
-// function updateItemQty(id, newVal) {
-//   const newQty = parseInt(newValue, 10);
+function updateItemQty(id, newVal) {
+  const newQty = parseInt(newVal, 10);
 
-//   if (isNaN(newQty) || newQty <= 0) {
-//     delete window.cart[id];
-//   } else {
-//     window.cart[id].newQty;
-//   }
+  if (isNaN(newQty) || newQty <= 0) {
+    delete window.cart[id];
+  } else {
+    window.cart[id] = newQty;
+  }
 
-//   renderProducts(currentFilter);
-//   if (typeof renderCart === "function") renderCart();
-// }
+  localStorage.setItem("waterShopCart", JSON.stringify(window.cart));
+
+  renderProducts(currentFilter);
+  if (typeof renderCart === "function") renderCart();
+}
 
 function addItemQty(id) {
   window.cart[id] = (window.cart[id] || 0) + 1;

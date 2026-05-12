@@ -61,7 +61,8 @@ function renderCart() {
                 </div>
                 <div class="qty-control">
                     <button class="qty-btn" onclick="subtItemQty(${item.id})">−</button>
-                    <span>${qty}</span>
+                    <!-- <span>${qty}</span> -->
+                    <input type="number" class="qty-num" min="1" value="${qty}" onchange="updateItemQty(${item.id}, this.value)">
                     <button class="qty-btn" onclick="addItemQty(${item.id})">+</button>
                 </div>
                 <div class="item-price">₱${(item.price * qty).toFixed(2)}</div>
