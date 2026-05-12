@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-$conn = new mysqli("localhost", "root", "", "aqualine_orders");
+include('../includes/db_connect.php');
 
 $order_id = $_GET['id'] ?? null;
 

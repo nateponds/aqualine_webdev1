@@ -6,9 +6,9 @@
     <title>Aqualine | Premium Water Delivery</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="cartStyle.css">
-    <link rel="stylesheet" href="checkoutFormStyle.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cartStyle.css">
+    <link rel="stylesheet" href="css/checkoutFormStyle.css">
 </head>
 <body>
     <header>
@@ -223,8 +223,8 @@
         <p>&copy; 2026 Aqualine Water Station Philippines. All rights reserved.</p>
     </footer>
 
-    <script src="waterShop.js"></script>
-    <script src="cart.js"></script>
-    <script src="admin.js"></script>
+    <script src="js/waterShop.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/admin.js"></script>
 </body>
 </html>

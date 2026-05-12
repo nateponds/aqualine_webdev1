@@ -9,7 +9,7 @@ if (!$order_id) {
     exit;
 }
 
-$conn = new mysqli("localhost", "root", "", "aqualine_orders");
+include('../includes/db_connect.php');
 
 if ($conn->connect_error) {
     echo json_encode(['status' => 'error', 'message' => 'Connection failed']);

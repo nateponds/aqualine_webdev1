@@ -1,7 +1,7 @@
 <?php
 
     header('Content-Type: application/json');
-    include('db_connect.php');
+    include('../includes/db_connect.php');
 
     $input = file_get_contents('php://input');
     $orderData = json_decode($input, true);

@@ -218,7 +218,7 @@ function submitOrder() {
     },
   };
 
-  fetch("checkout.php", {
+  fetch("../api/checkout.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

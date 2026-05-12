@@ -1,7 +1,7 @@
 <?php
     header('Content-Type: application/json');
 
-    $conn = new mysqli("localhost", "root", "", "aqualine_orders"); 
+    include('../includes/db_connect.php');
 
     if ($conn->connect_error) {
         echo json_encode(['error' => 'Database connection failed']);
