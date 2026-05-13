@@ -3,7 +3,7 @@
   <h1>Aqualine Logistics Database System</h1>
   <p>Streamlining water refilling station operations with precision.</p>
 </div>
-<br><br><hr>
+<br><hr>
 
 ![Build Status](https://img.shields.io/badge/status-active-success)
 <br>
