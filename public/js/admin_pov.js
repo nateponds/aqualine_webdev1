@@ -18,7 +18,22 @@ window.viewSummary = async function (orderId) {
     } else {
       products.forEach((itemString) => {
         const p = document.createElement("p");
-        p.textContent = itemString;
+
+        p.style.display = "flex";
+        p.style.justifyContent = "space-between";
+        p.style.alignItems = "center";
+
+        const lastSpaceIdx = itemString.lastIndexOf(" ");
+
+        if (lastSpaceIdx !== -1) {
+          const namePart = itemString.substring(0, lastSpaceIdx);
+          const pricePart = itemString.substring(lastSpaceIdx + 1);
+
+          p.innerHTML = `<span>${namePart}</span><span>${pricePart}</span>`;
+        } else {
+          p.textContent = itemString;
+        }
+
         listContainer.appendChild(p);
       });
     }
@@ -58,7 +73,8 @@ async function loadOrders() {
                     <td>${order.client_address}</td>
                     <td>${order.client_contact}</td>
                     <td>
-                        <select onchange="updateStatus(${order.order_id}, this.value)">
+                        <select class="status-dropdown ${order.delivery_status.toLowerCase().replace(/\s+/g, "-")}" 
+                          onchange="updateStatus(${order.order_id}, this.value, this)">
                             <option value="Pending" ${isPending}>Pending</option>
                             <option value="Out for Delivery" ${isOut}>Out for Delivery</option>
                             <option value="Delivered" ${isDelivered}>Delivered</option>
@@ -73,7 +89,7 @@ async function loadOrders() {
   } catch (error) {
     console.error("Error fetching orders:", error);
     tableBody.innerHTML =
-      "<tr><td colspan='9'>Failed to load database. Check console.</td></tr>";
+      "<tr><td colspan='9'>Failed to load database.</td></tr>";
   }
 }
 
@@ -94,18 +110,19 @@ async function cancelOrder(orderId) {
     const data = await response.json();
 
     if (data.status === "success") {
-      alert("Order deleted successfully!");
+      showToast("Order deleted successfully!");
+      // console.log("Order deleted successfully!");
       loadOrders();
     } else {
-      alert("Error: " + data.message);
+      showToast("Error: " + data.message);
     }
   } catch (error) {
     console.error("Cancel Error:", error);
-    alert("System error. Could not delete order.");
+    showToast("System error. Could not delete order.");
   }
 }
 
-async function updateStatus(orderId, newStatus) {
+async function updateStatus(orderId, newStatus, element) {
   try {
     const response = await fetch("../api/update_status.php", {
       method: "POST",
@@ -119,13 +136,17 @@ async function updateStatus(orderId, newStatus) {
     const data = await response.json();
 
     if (data.status === "success") {
-      console.log(`Order #${orderId} updated to ${newStatus}`);
+      element.classList.remove("pending", "out-for-delivery", "delivered");
+
+      element.classList.add(newStatus.toLowerCase().replace(/\s+/g, "-"));
+
+      showToast(`Order #${orderId} updated to ${newStatus}`, "success", 2200);
     } else {
-      alert("Failed to update status: " + data.message);
+      showToast("Failed to update status: " + data.message);
     }
   } catch (error) {
     console.error("Update Error:", error);
-    alert("System error. Status not saved.");
+    showToast("System error. Status not saved.");
   }
 }
 

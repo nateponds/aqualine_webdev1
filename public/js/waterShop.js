@@ -172,7 +172,7 @@ function subtItemQty(id) {
 
 function submitOrder() {
   if (Object.keys(window.cart).length === 0) {
-    alert("Your cart is empty!");
+    showToast("Your cart is empty!");
     return;
   }
 
@@ -182,7 +182,7 @@ function submitOrder() {
   const shipmentType = document.getElementById("checkout-shipment").value;
 
   if (!customerName || !customerContact || !customerAddress) {
-    alert("Please fill out all delivery details!");
+    showToast("Please fill out all delivery details!");
     return;
   }
 
@@ -229,7 +229,9 @@ function submitOrder() {
     .then((data) => {
       if (data.status === "success") {
         // CREATE A FEEDBACK MODAL TO REPLACE THIS AND MAKE MORE ASTITIK
-        alert("Order placed successfully! Your Order ID is: " + data.order_id);
+        showToast(
+          "Order placed successfully! Your Order ID is: " + data.order_id,
+        );
 
         window.cart = {};
         closeCheckoutModal();
@@ -238,18 +240,21 @@ function submitOrder() {
         renderProducts(currentFilter);
       } else {
         // THIS ONE ALSO GRRRR
-        alert("Error: " + data.message);
+        showToast("Error: " + data.message);
       }
     })
     .catch((error) => {
       console.error("Fetch Error: ", error);
-      alert("Failed to connect to the server. Check the console for details.");
+      showToast(
+        "Failed to connect to the server. Check the console for details.",
+      );
     });
 }
 
+// checkout modal
 function openCheckoutModal() {
   if (Object.keys(window.cart).length === 0) {
-    alert("Your cart is empty!");
+    showToast("Your cart is empty!");
     return;
   }
 
@@ -263,3 +268,20 @@ function closeCheckoutModal() {
 localStorage.setItem("waterShopCart", JSON.stringify(window.cart));
 
 renderProducts("all");
+
+//view order modal
+function openViewOrderModal() {
+  document.getElementById("view-order-modal").classList.add("active");
+  // console.log("opening view order modal");
+}
+
+function closeViewOrderModal() {
+  document.getElementById("view-order-modal").classList.remove("active");
+}
+
+function closeViewOrderModalOutside(event) {
+  const modalOverlay = document.getElementById("view-order-modal");
+  if (event.target === modalOverlay) {
+    closeViewOrderModal();
+  }
+}

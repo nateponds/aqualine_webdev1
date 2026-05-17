@@ -25,23 +25,30 @@ async function handleAdminLogin(event) {
   const pass = document.getElementById("password").value;
 
   try {
-    const response = await fetch("adminLogin.php", {
+    const response = await fetch("../api/adminLogin.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username: user, password: pass }),
+      body: JSON.stringify({
+        username: user,
+        password: pass,
+      }),
     });
 
     const data = await response.json();
 
     if (data.status === "success") {
-      alert("Login Successful! Redirecting...");
-      window.location.href = "admin_pov.php";
+      closeAdminModal();
+
+      showToast("Welcome back, Admin!", "success");
+      setTimeout(() => {
+        window.location.href = "admin_pov.php";
+      }, 1400);
     } else {
-      alert(data.message || "Invalid Credentials");
+      showToast(data.message || "Invalid Credentials", "error");
     }
   } catch (error) {
     console.error("Login Error:", error);
-    alert("System error. Please try again later.");
+    showToast("System error. Please try again later.", "error");
   }
 }
 

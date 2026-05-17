@@ -6,7 +6,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 $inputUser = $data['username'] ?? '';
 $inputPass = $data['password'] ?? '';
 
-$validUser = "admin";
+$validUser = "nateponds";
 $validPass = "admin123"; 
 
 if ($inputUser === $validUser && $inputPass === $validPass) {

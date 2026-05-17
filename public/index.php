@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/cartStyle.css">
     <link rel="stylesheet" href="css/checkoutFormStyle.css">
+    <link rel="stylesheet" href="css/aqualine-css.css">
+    <link rel="stylesheet" href="css/viewOrderModal.css">
 </head>
 <body>
     <header>
@@ -19,15 +21,42 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="javascript:void(0)" onclick="openAdminModal()">Admin</a></li>
+                <li><a href="javascript:void(0)" onclick="openViewOrderModal()">View Order</a></li>
             </ul>
         </nav>
     </header>
 
     <!--add image [right side] or like a carousel of sht we offer idek-->
     <section class="hero">
-        <p>WELCOME TO AQUALINE</p>
-        <h1>Highest Quality Water Services.</h1>
-        <a href="#services" class="btn-service">OUR SERVICE &rarr;</a> 
+    <div class="aq-blob one"></div>
+    <div class="aq-blob two"></div>
+
+    <div class="hero-wave">
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="rgba(255,255,255,0.18)"
+            d="M0,192L60,197.3C120,203,240,213,360,218.7C480,224,600,224,720,202.7C840,181,960,139,1080,138.7C1200,139,1320,181,1380,202.7L1440,224L1440,320L0,320Z">
+            </path>
+        </svg>
+    </div>
+
+        <div class="hero-content">
+            <h1>
+            Pure Water.<br>
+            <span>Delivered Fresh.</span>
+            </h1>
+
+            <p>
+            Premium purified drinking water for homes,
+            offices, and businesses with fast delivery
+            and trusted quality.
+            </p>
+
+            <a href="#catalog" class="btn-service">
+            Order Now
+            </a>
+
+        </div>
+
     </section>
 
     <section class="features">
@@ -49,16 +78,50 @@
         </div>
     </section>
 
-    <section class="about">
-        <div class="about-image" style="flex: 1;">
-            <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=1976&auto=format&fit=crop" alt="Purified Water">
+<section class="about">
+    <div class="about-glow"></div>
+    <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=1976&auto=format&fit=crop" alt="Purified Water">
+
+        <div class="about-badge">
+            <i class="fas fa-award"></i>
+            Trusted Since 1996
         </div>
-        <div class="about-content">
-            <h2 style="color: var(--primary-blue);">30 Years of Experience</h2>
-            <p>Aqualine has been the leading provider of clean, safe, and refreshing water delivery services in the Philippines. Our commitment to health and quality is unmatched.</p>
-            <br>
+    </div>
+
+    <div class="about-content">
+        <div class="section-label">
+            ABOUT AQUALINE
         </div>
-    </section>
+        <h2>
+            30 Years of Delivering
+            Clean & Safe Water
+        </h2>
+        <p>
+            Aqualine provides purified drinking water
+            for homes, offices, and businesses across
+            the Philippines with trusted quality,
+            reliable delivery, and customer-first service.
+        </p>
+
+        <div class="about-stats">
+            <div class="stat-card">
+                <h3>30+</h3>
+                <span>Years Experience</span>
+            </div>
+
+            <div class="stat-card">
+                <h3>2K+</h3>
+                <span>Happy Customers</span>
+            </div>
+
+            <div class="stat-card">
+                <h3>24/7</h3>
+                <span>Support & Delivery</span>
+            </div>
+        </div>
+    </div>
+</section>
 
     <section id="services" class="services"> 
         <h2>Different Types of Services</h2> 
@@ -107,10 +170,6 @@
                 <img src="images/left-arrow.png" alt="">
                 <!-- &larr; -->
             </button>
-        
-            <div class="products-grid">
-                <!--RENDER HERE THE PRODUCTS USING JAVASCRIPT-->
-            </div>
 
             <button class="nav-btn" onclick="moveCarousel(1)">
                 <img src="images/right-arrow.png" alt="">
@@ -125,8 +184,7 @@
         <div class="cart-panel">
             <!-- CART AND PRODUCTS WILL BE LAID OUT HERE -->
         </div>
-            
-        </div>
+
     </section>
     <!-- END HERE RENDERING WITH JS AND MYSQL -->
 
@@ -173,24 +231,6 @@
         </div>
     </div>
 
-    <!-- <div id="loginModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Admin Login</h2>
-            <form id="loginForm">
-                <div class="input-group">
-                    <label>Username</label>
-                    <input type="text" id="username" placeholder="Enter username" required>
-                </div>
-                <div class="input-group">
-                    <label>Password</label>
-                    <input type="password" id="password" placeholder="Enter password" required>
-                </div>
-                <button type="submit" class="btn-order" style="width: 100%; margin-top: 10px;">Login</button>
-            </form>
-        </div>
-    </div> -->
-
     <!-- THE FLOATING CHECKOUT FORM -->
     <div id="checkout-modal" class="checkout-overlay">
         <div class="checkout-content">
@@ -217,6 +257,25 @@
         </div>
     </div>
 
+
+    <!-- VIEW ORDER MODAL -->
+    <div id="view-order-modal" class="view-order-modal-overlay" onclick="closeViewOrderModalOutside(event)">
+        <div class="view-order-modal-content">
+            <div class="close-btn" onclick="closeViewOrderModal()">&times;</div>
+            <h3 style="margin-top: 0;">View Specific Order</h3>
+
+            <div id="order-receipt" class="order-receipt">
+
+            </div>
+
+            <label>Enter Order ID:</label>
+            <input type="text" name="" id="order-number" placeholder="" required>
+            <button class="btn-order" style="width: 100%; margin-top: 20px;" onclick="fetchOrderDetails()">View Order</button>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
     <footer>
         <div class="logo" style="color: var(--white);">Aqualine</div>
         <h3>Aqualine - Customized Solution For Every Industry Needs!</h3>
@@ -226,5 +285,8 @@
     <script src="js/waterShop.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/admin.js"></script>
+    <script src="js/aqualine-js.js"></script>
+    <script src="js/view-order.js"></script>
+    
 </body>
 </html>
