@@ -275,7 +275,7 @@
 })();
 
 /* toast notif sys */
-window.showToast = function (message, type = "info", duration = 3200) {
+window.showToast = function (message, type = "info", duration = 2800) {
   const container = document.getElementById("toast-container");
   if (!container) return;
   const toast = document.createElement("div");

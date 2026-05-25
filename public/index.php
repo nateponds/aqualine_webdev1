@@ -206,7 +206,7 @@
         <h2>Our Service Location</h2>
         <div class="map-container">
             <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7850810.198308434!2d117.48869153549727!3d12.879720788640097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x334191060937a09d%3A0xc34a5f4c478a8461!2sPhilippines!5e0!3m2!1sen!2sph!4v1715300000000!5m2!1sen!2sph" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3926.3313262973715!2d123.79155707584166!3d10.23485746939989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x334177c0cc0de863%3A0x6aec508e7001f8bd!2sSan%20Josemaria%20Village!5e0!3m2!1sen!2sph!4v1715300000000!5m2!1sen!2sph" 
                 width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
             </iframe>
         </div>

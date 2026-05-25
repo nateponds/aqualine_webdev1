@@ -276,6 +276,8 @@ function openViewOrderModal() {
 }
 
 function closeViewOrderModal() {
+  const receiptContainer = document.getElementById("order-receipt");
+  receiptContainer.innerHTML = ``;
   document.getElementById("view-order-modal").classList.remove("active");
 }
 

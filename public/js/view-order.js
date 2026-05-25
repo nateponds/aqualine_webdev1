@@ -7,8 +7,6 @@ function fetchOrderDetails() {
     return;
   }
 
-  receiptContainer.innerHTML = `<p>Loading order details...</p>`;
-
   fetch(`../api/get_order_details.php?id=${orderID}`)
     .then((response) => response.json())
     .then((data) => {
