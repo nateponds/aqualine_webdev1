@@ -3,7 +3,9 @@
 $host = "localhost";
 $username = "root";
 $password = "";
-$database = "aqualine_orders";
+// change the database in line 8 when using forked versions of aqualine 
+// to another database that may be sensitive to changes away from the main branch
+$database = "aqualine_branch-user";
 
 $conn = new mysqli($host, $username, $password, $database);
 
