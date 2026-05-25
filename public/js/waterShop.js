@@ -189,7 +189,7 @@ function submitOrder() {
   const cartArray = [];
   // let finalTotal = window.DELIVERY_FEE;
   let finalTotal = 0;
-  if (shipmentType === "Delivery") {
+  if (shipmentType === "delivery") {
     finalTotal += window.DELIVERY_FEE;
   }
 
@@ -230,8 +230,9 @@ function submitOrder() {
       if (data.status === "success") {
         // CREATE A FEEDBACK MODAL TO REPLACE THIS AND MAKE MORE ASTITIK
         showToast(
-          "Order placed successfully! Your Order ID is: " + data.order_id,
+          "Order placed successfully! Note your Order ID is: " + data.order_id,
         );
+        showOrderModal(data.order_id);
 
         window.cart = {};
         closeCheckoutModal();

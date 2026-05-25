@@ -177,7 +177,7 @@
             </button>
         </div>
         <div style="text-align:center; margin-top: 2.5rem;">
-            <button class="btn-order" onclick="openAndRenderCart()" onclick="submitOrder()">Order Now &rarr;</button>
+            <button class="btn-order" onclick="openAndRenderCart();">Order Now &rarr;</button>
         </div>
 
             
@@ -268,9 +268,29 @@
 
             </div>
 
-            <label>Enter Order ID:</label>
-            <input type="text" name="" id="order-number" placeholder="" required>
-            <button class="btn-order" style="width: 100%; margin-top: 20px;" onclick="fetchOrderDetails()">View Order</button>
+            <label>Match your Order Details with the following:</label>
+            <input type="text" name="" id="order-number" placeholder="Enter Order ID" required>
+            <input type="text" id="order-contact" placeholder="Enter Contact Number">
+            <button class="btn-order" style="width: 100%; margin-top: 20px;" onclick="fetchOrderDetails()">Track Order</button>
+        </div>
+    </div>
+
+    <!-- THANK YOU MODAL AQUALINE - after order checkout -->
+    <div id="aquaty-modal-overlay" class="aquaty-modal-backdrop">
+        <div class="aquaty-modal-card">
+            <div class="aquaty-modal-header">
+                <h3>Order Placed Successfully!</h3>
+            </div>
+            <div class="aquaty-modal-body">
+                <p>Thank you for choosing Aqualine. Please save your Order ID below to track your shipment status.</p>
+                <div class="aquaty-modal-id-box">
+                    <span id="aquaty-modal-order-id">#10042</span>
+                    <button onclick="copyOrderID()" class="aquaty-modal-copy-btn" title="Copy Order ID">📋 Copy</button>
+                </div>
+            </div>
+            <div class="aquaty-modal-footer">
+                <button onclick="closeOrderModal()" class="btn-order aquaty-modal-close-btn">Got it, close</button>
+            </div>
         </div>
     </div>
 

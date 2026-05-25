@@ -1,13 +1,16 @@
 function fetchOrderDetails() {
   const orderID = document.getElementById("order-number").value.trim();
+  const orderContact = document.getElementById("order-contact").value.trim();
   const receiptContainer = document.getElementById("order-receipt");
 
-  if (orderID === "") {
-    showToast("Please enter an Order ID.", "error");
+  if (orderID === "" || orderContact === "") {
+    showToast("Please enter both your Order ID and Contact Number.", "error");
     return;
   }
 
-  fetch(`../api/get_order_details.php?id=${orderID}`)
+  fetch(
+    `../api/get_order_details.php?id=${orderID}&contact=${encodeURIComponent(orderContact)}`,
+  )
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
@@ -58,5 +61,37 @@ function fetchOrderDetails() {
       console.error("Error fetching order:", error);
       receiptContainer.innerHTML = "";
       showToast("Failed to connect to the server.", "error");
+    });
+}
+
+// thank you modal aqualine
+function showOrderModal(orderId) {
+  const modal = document.getElementById("aquaty-modal-overlay");
+  const idSpan = document.getElementById("aquaty-modal-order-id");
+
+  idSpan.innerText = `#${orderId}`;
+  modal.style.display = "flex";
+}
+
+function closeOrderModal() {
+  document.getElementById("aquaty-modal-overlay").style.display = "none";
+}
+
+function copyOrderID() {
+  const idText = document
+    .getElementById("aquaty-modal-order-id")
+    .innerText.replace("#", "");
+
+  navigator.clipboard
+    .writeText(idText)
+    .then(() => {
+      if (typeof showToast === "function") {
+        showToast("Order ID copied to clipboard!", "success");
+      } else {
+        alert("Copied to clipboard!");
+      }
+    })
+    .catch((err) => {
+      console.error("Could not copy text: ", err);
     });
 }

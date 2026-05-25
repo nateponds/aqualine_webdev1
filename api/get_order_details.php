@@ -11,14 +11,19 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $order_id = isset($_GET['id']) ? $_GET['id'] : '';
+    $contact = isset($_GET ['contact']) ? trim($_GET['contact']) : '';
+    
 
-    if (empty($order_id)) {
-        echo json_encode(['success' => false, 'message' => 'No order ID provided.']);
+    if (empty($order_id) || empty($contact)) {
+        echo json_encode(['success' => false, 'message' => 'Both Order ID and Contact Number are required.']);
         exit;
     }
 
-    $orderStmt = $pdo->prepare("SELECT order_id, client_name, client_address, total_amount, delivery_status FROM order_list WHERE order_id = :id");
+    $orderStmt = $pdo->prepare("SELECT order_id, client_name, client_address, total_amount, delivery_status 
+                                FROM order_list 
+                                WHERE order_id = :id AND client_contact = :contact");
     $orderStmt->bindParam(':id', $order_id);
+    $orderStmt->bindParam(':contact', $contact);
     $orderStmt->execute();
     $order = $orderStmt->fetch(PDO::FETCH_ASSOC);
 
@@ -40,7 +45,7 @@ try {
             ]
         ]);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Order not found. Please check your ID.']);
+        echo json_encode(['success' => false, 'message' => 'Order not found or verification details do not match.']);
     }
 
 } catch(PDOException $e) {
