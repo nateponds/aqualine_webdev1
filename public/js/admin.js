@@ -79,3 +79,25 @@ window.viewSummary = async function (orderId) {
     listContainer.innerHTML = "<p>Error connecting to order_items.</p>";
   }
 };
+
+// forgot password admin update
+function handleForgotPassword() {
+  const forgotModal = document.getElementById("aq-forgot-modal");
+  if (forgotModal) {
+    forgotModal.classList.add("active");
+  }
+}
+
+function closeForgotModal() {
+  const forgotModal = document.getElementById("aq-forgot-modal");
+  if (forgotModal) {
+    forgotModal.classList.remove("active");
+  }
+}
+
+function closeForgotModalOutside(event) {
+  const forgotModal = document.getElementById("aq-forgot-modal");
+  if (event.target === forgotModal) {
+    closeForgotModal();
+  }
+}

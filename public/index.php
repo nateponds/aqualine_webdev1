@@ -226,6 +226,10 @@
                     <label>Password</label>
                     <input type="password" id="password" placeholder="Enter password" required>
                 </div>
+                <div style="text-align: right; margin-top: -5px; margin-bottom: 15px;">
+                    <a href="javascript:void(0)" onclick="handleForgotPassword()" style="font-size: 0.82rem; color: #6c757d; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#007bff'" onmouseout="this.style.color='#6c757d'">Forgot Password?</a>
+                </div>
+
                 <button type="submit" class="btn-order" style="width: 100%; margin-top: 10px;">Login</button>
             </form>
         </div>
@@ -295,6 +299,32 @@
     </div>
 
     <div id="toast-container"></div>
+
+    <div id="aq-forgot-modal" class="admin-overlay" onclick="closeForgotModalOutside(event)">
+        <div class="admin-content aq-support-card">
+            <span class="close-admin" onclick="closeForgotModal()">×</span>
+            
+            <div class="aq-support-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            
+            <h3 class="aq-support-title">System Support</h3>
+            
+            <p class="aq-support-message">
+                For security reasons, credential resets must be handled directly by platform administration. Please contact the IT Department hotline:
+            </p>
+            
+            <div class="aq-support-hotline">
+                <i class="fas fa-phone-alt"></i> LOCAL 4200
+            </div>
+            
+            <div class="aq-support-availability">
+                Available: Mon - Fri (8:00 AM - 5:00 PM)
+            </div>
+            
+            <button onclick="closeForgotModal()" class="btn-order aq-support-close-btn">Got it, close</button>
+        </div>
+    </div>
 
     <footer>
         <div class="logo" style="color: var(--white);">Aqualine</div>

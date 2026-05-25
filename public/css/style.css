@@ -683,3 +683,59 @@ input[type="number"].qty-num {
     opacity: 1;
   }
 }
+
+/* forgot password admin update */
+
+.admin-content.aq-support-card {
+  height: auto;
+  max-width: 380px;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.aq-support-icon {
+  font-size: 2.5rem;
+  color: var(--status-cancelled);
+  margin-bottom: 15px;
+}
+
+.aq-support-title {
+  margin: 0 0 10px 0;
+  color: var(--dark-blue);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.aq-support-message {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.aq-support-hotline {
+  background: #fff1f2;
+  border: 1.5px dashed var(--status-cancelled);
+  padding: 12px;
+  border-radius: var(--radius);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #9f1239;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.aq-support-availability {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.aq-support-close-btn {
+  width: 100%;
+}

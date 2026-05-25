@@ -34,6 +34,65 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     <div class="admin-container">
       <h2>Aqualine Delivery Orders</h2>
 
+      <div class="aq-reports-container">
+    
+        <div class="aq-report-card card-revenue">
+                <div class="aq-report-label">Gross Revenue</div>
+                <div id="metricGrossRevenue" class="aq-report-value">₱0.00</div>
+                <div class="aq-report-subtext subtext-success">
+                    <i class="fas fa-wallet"></i> Total fulfilled earnings
+                </div>
+            </div>
+
+            <div class="aq-report-card card-delivered">
+                <div class="aq-report-label">Delivered Orders</div>
+                <div id="metricDeliveredCount" class="aq-report-value text-success">0</div>
+                <div class="aq-report-subtext">
+                    <i class="fas fa-check-circle"></i> Completed drop-offs
+                </div>
+            </div>
+
+            <div class="aq-report-card card-pending">
+                <div class="aq-report-label">Pending Logistics</div>
+                <div id="metricPendingCount" class="aq-report-value text-warning">0</div>
+                <div class="aq-report-subtext">
+                    <i class="fas fa-clock"></i> Awaiting prep / delivery
+                </div>
+            </div>
+
+            <div class="aq-report-card card-cancelled">
+                <div class="aq-report-label">Cancellations</div>
+                <div id="metricCancelledCount" class="aq-report-value text-danger">0</div>
+                <div class="aq-report-subtext subtext-danger">
+                    <i class="fas fa-ban"></i> Soft-deleted orders
+                </div>
+            </div>
+
+      </div>
+      
+
+      <!-- search bar -->
+      <div class="admin-toolbar" style="display: flex; gap: 15px; margin-bottom: 24px; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+          <div style="display: flex; gap: 10px; flex: 1; min-width: 280px;">
+              <input type="text" id="adminSearchInput" placeholder="Search by customer name..." oninput="resetToFirstPageAndFilter()" style="width: 100%; padding: 11px 14px; border: 1.5px solid var(--border-color); border-radius: 8px; font-family: inherit; font-size: 0.9rem; outline: none;">
+          </div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <select id="adminStatusFilter" onchange="resetToFirstPageAndFilter()" class="status-dropdown" style="min-width: 150px; padding: 10px 32px 10px 12px;">
+                  <option value="all">All Statuses</option>
+                  <option value="pending">Pending</option>
+                  <option value="out for delivery">Out for Delivery</option>
+                  <option value="delivered">Delivered</option>
+                  <option value="cancelled">Cancelled</option>
+              </select>
+              
+              <select id="adminShipmentFilter" onchange="resetToFirstPageAndFilter()" class="status-dropdown" style="min-width: 150px; padding: 10px 32px 10px 12px;">
+                  <option value="all">All Order Types</option>
+                  <option value="delivery">Delivery</option>
+                  <option value="pickup">Store Pickup</option>
+              </select>
+          </div>
+      </div>
+
       <div class="table-responsive">
         <table class="order-table">
           <thead>
@@ -54,6 +113,20 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
         </table>
       </div>
     </div>
+
+
+    <!-- pagination -->
+    <div class="admin-pagination-container" style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-color);">
+          <div id="paginationInfo" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">
+              Showing 0 to 0 of 0 entries
+          </div>
+          <div class="pagination-buttons" style="display: flex; gap: 8px; align-items: center;">
+              <button class="btn-summary" id="prevPageBtn" onclick="changePage(-1)" style="padding: 6px 14px; font-size: 0.8rem;">Previous</button>
+              <div id="pageNumbersContainer" style="display: flex; gap: 6px;"></div>
+              <button class="btn-summary" id="nextPageBtn" onclick="changePage(1)" style="padding: 6px 14px; font-size: 0.8rem;">Next</button>
+          </div>
+      </div>
+
 
     <!-- order summary modal -->
     <div id="summaryModal" class="order_summOverlay" onclick="closeSummaryOutside(event)">

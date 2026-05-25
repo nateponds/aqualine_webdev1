@@ -8,7 +8,7 @@
         exit;
     }
 
-    $sql = "SELECT order_id, client_name, order_date, total_amount, client_address, client_contact, delivery_status FROM order_list ORDER BY order_id DESC";
+    $sql = "SELECT order_id, client_name, order_date, total_amount, client_address, client_contact, delivery_status, shipment_type FROM order_list ORDER BY order_id DESC";
     $result = $conn->query($sql);
 
     $orders = [];
