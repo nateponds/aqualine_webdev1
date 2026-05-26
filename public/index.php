@@ -1,3 +1,9 @@
+<?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +27,17 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="javascript:void(0)" onclick="openAdminModal()">Admin</a></li>
-                <li><a href="javascript:void(0)" onclick="openViewOrderModal()">View Order</a></li>
+                
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <li>
+                        <a href="account_dashboard.php" style="color: var(--primary-blue); font-weight: 600;">
+                            <i class="fas fa-user-circle"></i> Hi, <?php echo htmlspecialchars($_SESSION['username']); ?>
+                        </a>
+                    </li>
+                    <li><a href="../api/userLogout.php" style="color: #ff4757;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <?php else: ?>
+                    <li><a href="javascript:void(0)" onclick="openAuthModal()">Sign In || Register</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>
@@ -326,11 +342,88 @@
         </div>
     </div>
 
+    <!-- user account signup/login  -->
+    <div id="aq-auth-modal" class="admin-overlay" onclick="closeAuthModalOutside(event)">
+        <div class="admin-content aq-auth-card">
+            <span class="close-admin" onclick="closeAuthModal()">×</span>
+            
+            <div class="aq-auth-tabs">
+                <button id="tabSignIn" class="aq-auth-tab active" onclick="switchAuthTab('signin')">Sign In</button>
+                <button id="tabSignUp" class="aq-auth-tab" onclick="switchAuthTab('signup')">Create Account</button>
+            </div>
+
+            <div id="formContainerSignIn" class="aq-auth-form-view active">
+                <h2>Welcome Back</h2>
+                <p>Sign in to monitor live delivery tracking, and view your past orders history.</p>
+                
+                <form id="userLoginForm" onsubmit="handleUserLogin(event)">
+                    <div class="input-group">
+                        <label>Username</label>
+                        <input type="text" id="loginUsername" placeholder="Enter your username" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn-order aq-auth-submit-btn">Login to Dashboard</button>
+                </form>
+            </div>
+
+            <div id="formContainerSignUp" class="aq-auth-form-view">
+                <h2>Join Aqualine</h2>
+                <p>Create an account to securely save your profile addresses and configure automated fast-checkout presets.</p>
+                
+                <form id="userRegisterForm" onsubmit="handleUserRegistration(event)">
+                    <div class="aq-auth-scroll-view">
+                        <div class="input-group">
+                            <label>Username</label>
+                            <input type="text" id="regUsername" placeholder="Choose a unique username" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <input type="email" id="regEmail" placeholder="name@example.com" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Password</label>
+                            <input type="password" id="regPassword" placeholder="Create strong security password" required>
+                        </div>
+                        
+                        <div class="aq-auth-divider">Profile Defaults (For 1-Click Checkout)</div>
+                        
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input type="text" id="regClientName" placeholder="E.g. Juan Dela Cruz" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Contact Number</label>
+                            <input type="text" id="regClientContact" placeholder="09xxxxxxxxx" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Default Shipping Address</label>
+                            <input type="text" id="regClientAddress" placeholder="Street, Barangay, City, Cebu" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-order aq-auth-submit-btn">Complete Registration</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
     <footer>
         <div class="logo" style="color: var(--white);">Aqualine</div>
         <h3>Aqualine - Customized Solution For Every Industry Needs!</h3>
         <p>&copy; 2026 Aqualine Water Station Philippines. All rights reserved.</p>
     </footer>
+
+    <script>
+        window.AQUALINE_USER = <?php echo isset($_SESSION['user_id']) ? json_encode([
+            'loggedIn'       => true,
+            'client_name'    => $_SESSION['client_name'],
+            'client_contact' => $_SESSION['client_contact'],
+            'client_address' => $_SESSION['client_address']
+        ]) : json_encode(['loggedIn' => false]); ?>;
+    </script>
 
     <script src="js/waterShop.js"></script>
     <script src="js/cart.js"></script>

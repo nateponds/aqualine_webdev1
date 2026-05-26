@@ -226,6 +226,17 @@ function submitOrder() {
     body: JSON.stringify(orderData),
   })
     .then((response) => response.json())
+    // .then(async (response) => {
+    //   const rawText = await response.text();
+    //   console.log("RAW SERVER RESPONSE:", rawText);
+
+    //   try {
+    //     return JSON.parse(rawText);
+    //   } catch (e) {
+    //     showToast("Server Error Exposed! Check Console.");
+    //     throw new Error("Raw response was not clean JSON.");
+    //   }
+    // })
     .then((data) => {
       if (data.status === "success") {
         // CREATE A FEEDBACK MODAL TO REPLACE THIS AND MAKE MORE ASTITIK
@@ -257,6 +268,16 @@ function openCheckoutModal() {
   if (Object.keys(window.cart).length === 0) {
     showToast("Your cart is empty!");
     return;
+  }
+
+  if (window.AQUALINE_USER && window.AQUALINE_USER.loggedIn) {
+    const nameField = document.getElementById("checkout-name");
+    const contactField = document.getElementById("checkout-contact");
+    const addressField = document.getElementById("checkout-address");
+
+    if (nameField) nameField.value = window.AQUALINE_USER.client_name;
+    if (contactField) contactField.value = window.AQUALINE_USER.client_contact;
+    if (addressField) addressField.value = window.AQUALINE_USER.client_address;
   }
 
   document.getElementById("checkout-modal").classList.add("active");

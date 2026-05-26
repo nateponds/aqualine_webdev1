@@ -1,6 +1,7 @@
 <?php
-
     header('Content-Type: application/json');
+    session_start();
+
     include('../includes/db_connect.php');
 
     $input = file_get_contents('php://input');
@@ -10,6 +11,8 @@
         echo json_encode(['status' => 'error', 'message' => 'Cart is empty']);
         exit;
     }
+
+    $user_id = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null;
 
     // make the checkout form from front-end fetched to here
     $client_name = $orderData['customer_info']['name'];
@@ -21,8 +24,23 @@
     $total_amount = $orderData['total'];
     $delivery_status = "pending";
 
-    $stmt = $conn->prepare("INSERT INTO order_list (client_name, order_date, total_amount, delivery_status, client_address, client_contact, shipment_type) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssdssss", $client_name, $order_date, $total_amount, $delivery_status, $client_address, $client_contact, $shipment_type);
+    $stmt = $conn->prepare("INSERT INTO order_list (user_id, client_name, order_date, total_amount, delivery_status, client_address, client_contact, shipment_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    
+    if (!$stmt) {
+        echo json_encode(['status' => 'error', 'message' => 'SQL prepare failed: ' . $conn->error]);
+        exit;
+    }
+
+    $stmt->bind_param("issdssss", 
+        $user_id, 
+        $client_name, 
+        $order_date, 
+        $total_amount, 
+        $delivery_status, 
+        $client_address, 
+        $client_contact, 
+        $shipment_type
+    );
 
     if($stmt->execute()){
         $order_id = $conn->insert_id;
