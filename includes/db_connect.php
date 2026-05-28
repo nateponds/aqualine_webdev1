@@ -1,20 +1,28 @@
 <?php
+// Detect if we are running on XAMPP (localhost) or the Staging Server
+if (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false) {
+    // --- LOCAL XAMPP CREDENTIALS ---
+    $host = "localhost";
+    $username = "root"; 
+    $password = "";
+} else {
+    // --- UBUNTU HOMELAB CREDENTIALS ---
+    $host = "localhost";
+    $username = "aqualine_admin"; 
+    $password = "aqualine123";
+}
 
-$host = "localhost";
-$username = "root";
-$password = "";
-// change the database in line 8 when using forked versions of aqualine 
-// to another database that may be sensitive to changes away from the main branch
+// Keep the database the same for both
 $database = "aqualine_branch-user";
 
 $conn = new mysqli($host, $username, $password, $database);
 
-// if ($conn->connect_error) {
-//     die("Connection failed: ngano itom kaau ka oi" . $conn->connect_error);
-// }
-
-
-// echo "test: if you see this u got it working! if not u are BLACCCCCCC";
+if ($conn->connect_error) {
+    header('Content-Type: application/json');
+    echo json_encode([
+        'status' => 'error', 
+        'message' => 'Database connection failed: ' . $conn->connect_error
+    ]);
+    exit;
+}
 ?>
-
-

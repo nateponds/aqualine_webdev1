@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 session_start();
 
-include('../includes/db_connect.php');
+require('../includes/db_connect.php');
 
 $data = json_decode(file_get_contents('php://input'), true);
 

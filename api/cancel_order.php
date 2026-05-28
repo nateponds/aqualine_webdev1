@@ -9,12 +9,7 @@ if (!$order_id) {
     exit;
 }
 
-include('../includes/db_connect.php');
-
-if ($conn->connect_error) {
-    echo json_encode(['status' => 'error', 'message' => 'Connection failed']);
-    exit;
-}
+require('../includes/db_connect.php');
 
 $stmt = $conn->prepare("DELETE FROM order_list WHERE order_id = ?");
 $stmt->bind_param("i", $order_id);

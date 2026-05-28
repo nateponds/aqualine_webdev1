@@ -1,7 +1,7 @@
 <?php
     header('Content-Type: application/json');
 
-    include('../includes/db_connect.php');
+    require('../includes/db_connect.php');
 
     if ($conn->connect_error) {
         echo json_encode(['error' => 'Database connection failed']);
