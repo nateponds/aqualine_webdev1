@@ -10,8 +10,7 @@ if (!$order_id || !$new_status) {
     exit;
 }
 
-$conn = new mysqli("localhost", "root", "", "aqualine_orders");
-
+$conn = new mysqli("localhost", "aqualine_admin", "aqualine123", "aqualine");
 if ($conn->connect_error) {
     echo json_encode(['status' => 'error', 'message' => 'Connection failed']);
     exit;

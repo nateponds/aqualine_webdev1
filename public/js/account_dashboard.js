@@ -36,7 +36,7 @@ async function loadUserOrders() {
             <td><strong>₱${parseFloat(order.total_amount).toFixed(2)}</strong></td>
             <td style="text-transform: capitalize;">${order.shipment_type}</td>
             <td>
-                <span class="status-dropdown ${statusClass}" style="padding: 6px 16px; border-radius: 20px; font-weight:700; font-size:0.75rem; text-transform: uppercase; border: 1.5px solid;">
+                <span class="status ${statusClass}" style="padding: 6px 16px; border-radius: 20px; font-weight:700; font-size:0.75rem; text-transform: uppercase; border: 1.5px solid;">
                     ${order.delivery_status}
                 </span>
             </td>
