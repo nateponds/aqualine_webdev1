@@ -128,16 +128,23 @@ function renderPagedTable() {
 
   // Iterate over matching items slice context entries
   pageItems.forEach((order) => {
+    // Normalize the incoming string from the database
+    const statusRaw = (order.delivery_status || "").toLowerCase().trim();
+
+    // Route your checks safely (mapping 'delivery' or 'pending' fallback definitions)
     const isPending =
-      order.delivery_status.toLowerCase() === "pending" ? "selected" : "";
-    const isOut =
-      order.delivery_status.toLowerCase() === "out for delivery"
+      statusRaw === "pending" || statusRaw === "delivery" || statusRaw === ""
         ? "selected"
         : "";
-    const isDelivered =
-      order.delivery_status.toLowerCase() === "delivered" ? "selected" : "";
-    const isCancelled =
-      order.delivery_status.toLowerCase() === "cancelled" ? "selected" : "";
+    const isOut = statusRaw === "out for delivery" ? "selected" : "";
+    const isDelivered = statusRaw === "delivered" ? "selected" : "";
+    const isCancelled = statusRaw === "cancelled" ? "selected" : "";
+
+    // Compute a safe CSS modifier fallback class name
+    let cssClassModifier = statusRaw.replace(/\s+/g, "-");
+    if (cssClassModifier === "delivery" || cssClassModifier === "") {
+      cssClassModifier = "pending"; // force it to colorize using your pending CSS rules
+    }
 
     const rowHTML = `
         <tr>
@@ -149,7 +156,7 @@ function renderPagedTable() {
             <td>${order.client_address}</td>
             <td>${order.client_contact}</td>
             <td>
-                <select class="status-dropdown ${order.delivery_status.toLowerCase().replace(/\s+/g, "-")}" 
+                <select class="status-dropdown ${cssClassModifier}" 
                   onchange="updateStatus(${order.order_id}, this.value, this)">
                     <option value="Pending" ${isPending}>Pending</option>
                     <option value="Out for Delivery" ${isOut}>Out for Delivery</option>
@@ -213,10 +220,17 @@ async function cancelOrder(orderId) {
       showToast("Order marked as cancelled successfully!");
 
       const cachedOrder = allOrdersCache.find((o) => o.order_id == orderId);
-      if (cachedOrder) cachedOrder.delivery_status = "cancelled";
+      if (cachedOrder) {
+        cachedOrder.delivery_status = "Cancelled";
+      }
 
       calculateAdminReports();
-      filterOrders();
+
+      if (typeof filterOrders === "function") {
+        filterOrders();
+      } else {
+        renderPagedTable();
+      }
     } else {
       showToast("Error: " + data.message);
     }

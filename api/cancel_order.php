@@ -11,13 +11,13 @@ if (!$order_id) {
 
 require('../includes/db_connect.php');
 
-$stmt = $conn->prepare("DELETE FROM order_list WHERE order_id = ?");
+$stmt = $conn->prepare("UPDATE order_list SET delivery_status = 'Cancelled' WHERE order_id = ?");
 $stmt->bind_param("i", $order_id);
 
-if ($stmt->execute()) {
+if ($stmt->execute() && $stmt->affected_rows > 0) {
     echo json_encode(['status' => 'success']);
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'Delete failed']);
+    echo json_encode(['status' => 'error', 'message' => 'Cancellation failed or order does not exist']);
 }
 
 $stmt->close();
