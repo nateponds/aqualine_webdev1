@@ -18,7 +18,8 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
   </head>
   <body>
 
-    <div class="header">
+
+    <!-- <div class="header">
       <div class="header-info">
         <div>Administrator</div>
         <div style="font-weight:400; color:#5a7a9a; font-size:0.75rem;">Aqualine Delivery Management</div>
@@ -29,6 +30,23 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
           <i class="fas fa-sign-out-alt" style="margin-right:5px;"></i>Logout
         </button>
       </a>
+    </div> -->
+
+    <div class="header">
+      <div class="logo">Aqualine</div>
+
+      <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="header-info">
+              <div>Administrator</div>
+              <div style="font-weight:400; color:#5a7a9a; font-size:0.75rem;">System Management</div>
+          </div>
+          <div class="header-avatar">A</div>
+          <a href="../api/userLogout.php" style="text-decoration:none;">
+              <button class="logout-btn">
+                  <i class="fas fa-sign-out-alt" style="margin-right:5px;"></i>Logout
+              </button>
+          </a>
+      </div>
     </div>
 
     <div class="admin-container">

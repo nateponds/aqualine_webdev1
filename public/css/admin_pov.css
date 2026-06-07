@@ -28,21 +28,40 @@ body {
     rgba(0, 123, 255, 0.08) 0%,
     transparent 70%
   );
-  padding: 30px;
   font-family: "Poppins", sans-serif;
   color: var(--text-main);
   min-height: 100vh;
   overflow-x: hidden;
+  margin: 0;
 }
 
 /* header */
 .header {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 16px;
   margin-bottom: 28px;
   animation: hdr-in 0.5s var(--ease) both;
+
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  padding: 20px 10%;
+  box-shadow: 0 4px 20px rgba(0, 51, 102, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  position: sticky;
+  top: 0px;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--dark-blue);
+  text-transform: uppercase;
 }
 
 @keyframes hdr-in {
