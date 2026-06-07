@@ -248,7 +248,7 @@
                     <input type="password" id="password" placeholder="Enter password" required>
                 </div>
                 <div style="text-align: right; margin-top: -5px; margin-bottom: 15px;">
-                    <a href="javascript:void(0)" onclick="handleForgotPassword()" style="font-size: 0.82rem; color: #6c757d; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#007bff'" onmouseout="this.style.color='#6c757d'">Forgot Password?</a>
+                    <a href="javascript:void(0)" onclick="handleAdminForgotPassword()" style="font-size: 0.82rem; color: #6c757d; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#007bff'" onmouseout="this.style.color='#6c757d'">Forgot Password?</a>
                 </div>
 
                 <button type="submit" class="btn-order" style="width: 100%; margin-top: 10px;">Login</button>
