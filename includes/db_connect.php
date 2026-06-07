@@ -1,5 +1,4 @@
 <?php
-// Detect if we are running on XAMPP (localhost) or the Staging Server
 if (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false) {
     // --- LOCAL XAMPP CREDENTIALS ---
     $host = "localhost";
@@ -12,7 +11,6 @@ if (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false) {
     $password = "aqualine123";
 }
 
-// Keep the database the same for both
 $database = "aqualine_branch-user";
 
 $conn = new mysqli($host, $username, $password, $database);

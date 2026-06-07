@@ -81,7 +81,7 @@ window.viewSummary = async function (orderId) {
 };
 
 // forgot password admin update
-function handleForgotPassword() {
+function handleAdminForgotPassword() {
   const forgotModal = document.getElementById("aq-forgot-modal");
   if (forgotModal) {
     forgotModal.classList.add("active");
