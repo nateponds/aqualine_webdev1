@@ -10,7 +10,7 @@
 }
 
 .aq-user-header {
-  background: var(--white);
+  /* background: var(--white);
   padding: 24px 32px;
   border-radius: var(--radius);
   box-shadow: 0 16px 48px rgba(0, 51, 102, 0.05);
@@ -19,7 +19,27 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: 16px; */
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 16px;
+
+  margin: 0 0 24px 0;
+  padding: 18px 5%;
+
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 20px rgba(0, 51, 102, 0.05);
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .aq-welcome-group {

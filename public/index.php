@@ -34,7 +34,12 @@
                             <i class="fas fa-user-circle"></i> Hi, <?php echo htmlspecialchars($_SESSION['username']); ?>
                         </a>
                     </li>
-                    <li><a href="../api/userLogout.php" style="color: #ff4757;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <!-- <li><a href="../api/userLogout.php" style="color: #ff4757;"><i class="fas fa-sign-out-alt"></i> Logout</a></li> -->
+                    <li>
+                        <button class="logout-btn" onclick="window.location.href='../api/userLogout.php'">
+                            <i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i>Logout
+                        </button>
+                    </li>
                 <?php else: ?>
                     <li><a href="javascript:void(0)" onclick="openAuthModal()">Sign In || Register</a></li>
                 <?php endif; ?>

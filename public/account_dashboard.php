@@ -19,31 +19,31 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
 
-    <div class="aq-dashboard-layout">
-        
-        <div class="aq-user-header">
-            <div class="aq-welcome-group">
-                <div class="aq-user-avatar">
-                    <?php echo strtoupper(substr($_SESSION['username'], 0, 1)); ?>
-                </div>
-                <div class="aq-user-details">
-                    <h1>Mabuhay, <?php echo htmlspecialchars($_SESSION['client_name']); ?>!</h1>
-                    <div style="color: var(--text-muted); font-size: 0.8rem; font-weight: 500;">Customer Dashboard Portal</div>
-                </div>
+    <div class="aq-user-header">
+        <div class="aq-welcome-group">
+            <div class="aq-user-avatar">
+                <?php echo strtoupper(substr($_SESSION['username'], 0, 1)); ?>
             </div>
-            <div style="display: flex; gap: 12px;">
-                <a href="index.php" style="text-decoration: none;">
-                    <button class="btn-summary" style="background: var(--white); color: var(--accent-blue); border: 1.5px solid var(--accent-blue); box-shadow: none;">
-                        <i class="fas fa-store" style="margin-right: 6px;"></i>Order Water
-                    </button>
-                </a>
-                <a href="../api/userLogout.php" style="text-decoration: none;">
-                    <button class="logout-btn">
-                        <i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i>Logout
-                    </button>
-                </a>
+            <div class="aq-user-details">
+                <h1>Mabuhay, <?php echo htmlspecialchars($_SESSION['client_name']); ?>!</h1>
+                <div style="color: var(--text-muted); font-size: 0.8rem; font-weight: 500;">Customer Dashboard Portal</div>
             </div>
         </div>
+        <div style="display: flex; gap: 12px;">
+            <a href="index.php" style="text-decoration: none;">
+                <button class="btn-summary" style="background: var(--white); color: var(--accent-blue); border: 1.5px solid var(--accent-blue); box-shadow: none;">
+                    <i class="fas fa-store" style="margin-right: 6px;"></i>Home
+                </button>
+            </a>
+            <a href="../api/userLogout.php" style="text-decoration: none;">
+                <button class="logout-btn">
+                    <i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i>Logout
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <div class="aq-dashboard-layout">
 
         <div class="admin-container" style="width: 100%; padding: 32px;">
             <h2 style="margin-bottom: 24px;">Your Purchase History</h2>
